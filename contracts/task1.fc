@@ -10,9 +10,9 @@
     int execution_time = Storage~load_uint(32);
     slice receiver = Storage~load_msg_addr();
     int seqno = Storage.slice_last(32).preload_uint(32);
-            accept_message();
 
     int op = ExtInMsgBody~load_uint(32);
+    accept_message();
 
 
     if(op == 0x9df10277)
