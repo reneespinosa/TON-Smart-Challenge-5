@@ -1,8 +1,5 @@
 #include "imports/stdlib.fc";
 
-const op::update = 0x9df10277 ;
-const op::claim = 0xbb4be234;
-
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
@@ -17,7 +14,7 @@ const op::claim = 0xbb4be234;
     int op = ExtInMsgBody~load_uint(32);
 
 
-    if(op == op::update)
+    if(op == 0x9df10277)
     {
         int query_id = ExtInMsgBody~load_uint(64);
         slice signature = ExtInMsgBody~load_bits(512);
@@ -47,10 +44,11 @@ const op::claim = 0xbb4be234;
 
     }
 
-    if(op == op::claim)
+    if(op == 0xbb4be234)
     {
         throw_if(124 , execution_time < now());
 
+            accept_message();
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(receiver)
