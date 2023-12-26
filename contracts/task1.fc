@@ -47,6 +47,8 @@
         throw_if(124 , get_execution_time() < now());
         accept_message();
 
+            int query_id = ExtInMsgBody~load_uint(64);
+
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(receiver)
