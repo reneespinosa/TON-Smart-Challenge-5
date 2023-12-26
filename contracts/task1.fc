@@ -9,7 +9,7 @@
     slice Storage = get_data().begin_parse();
     int public_key = Storage~load_uint(256);
     int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
+    slice receiver = Storage~load_bits(256);
     int seqno = Storage~load_uint(32);
 
     int op = ExtInMsgBody~load_uint(32);
@@ -51,9 +51,9 @@
 
 
             cell msg = begin_cell()
-                .store_uint(0x10, 6)
+                .store_uint(0x18, 6)
                 .store_slice(receiver)
-                .store_grams(0)
+                .store_coins(0)
                 .store_uint(0,1 + 4 + 4 + 64 + 32 + 1 + 1)
                 .end_cell();
 
@@ -65,14 +65,12 @@
 
 }
 
-
 int get_seqno() method_id {
     slice Storage = get_data().begin_parse();
     int public_key = Storage~load_uint(256);
     int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
+    slice receiver = Storage~load_bits(512);
     int seqno = Storage~load_uint(32);
-
     return seqno;
 } 
 
@@ -80,8 +78,7 @@ int get_execution_time() method_id {
     slice Storage = get_data().begin_parse();
     int public_key = Storage~load_uint(256);
     int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
+    slice receiver = Storage~load_bits(512);
     int seqno = Storage~load_uint(32);
-
     return execution_time;
 }
