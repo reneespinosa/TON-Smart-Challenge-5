@@ -14,35 +14,34 @@
     int op = ExtInMsgBody~load_uint(32);
 
 
-    if(op == 0x9df10277)
-    {
-        int query_id = ExtInMsgBody~load_uint(64);
-        slice signature = ExtInMsgBody~load_bits(512);
-        slice ref = ExtInMsgBody~load_ref().begin_parse();
-        int hash = slice_hash(ref);
-        int locked_for = ref~load_uint(32);
-        int new_seqno = ref~load_uint(32);
+;;    if(op == 0x9df10277)
+;;    {
+;;        int query_id = ExtInMsgBody~load_uint(64);
+;;        slice signature = ExtInMsgBody~load_bits(512);
+;;        slice ref = ExtInMsgBody~load_ref().begin_parse();
+;;        int hash = slice_hash(ref);
+;;        int locked_for = ref~load_uint(32);
+;;        int new_seqno = ref~load_uint(32);
 
-        throw_if( 119 , new_seqno != seqno + 1);
-        throw_unless(120, check_signature(hash,signature,public_key));
-        throw_if( 121 , locked_for <= 0);
-        throw_if( 122 ,  execution_time < now());
-        throw_if( 123 ,  now() + locked_for < execution_time);
+;;        throw_if( 119 , new_seqno != seqno + 1);
+;;        throw_unless(120, check_signature(hash,signature,public_key));
+;;        throw_if( 121 , locked_for <= 0);
+;;        throw_if( 122 ,  execution_time < now());
+;;        throw_if( 123 ,  now() + locked_for < execution_time);
+;;
+;;        execution_time = locked_for + now();
+;;        seqno = new_seqno;
+;;
+ ;;       set_data(
+;;            begin_cell()
+;;                .store_uint(public_key,256)
+;;                .store_uint(execution_time,32)
+;;                .store_slice(receiver)
+;;                .store_uint(seqno,32)
+;;            .end_cell()
+;;        );
 
-        execution_time = locked_for + now();
-        seqno = new_seqno;
-
-        set_data(
-            begin_cell()
-                .store_uint(public_key,256)
-                .store_uint(execution_time,32)
-                .store_slice(receiver)
-                .store_uint(seqno,32)
-            .end_cell()
-        );
-
-
-    }
+;;    }
 
     if(op == 0xbb4be234)
     {
