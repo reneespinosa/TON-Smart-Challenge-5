@@ -10,6 +10,7 @@
     int execution_time = Storage~load_uint(32);
     slice receiver = Storage~load_msg_addr();
     int seqno = Storage.slice_last(32).preload_uint(32);
+            accept_message();
 
     int op = ExtInMsgBody~load_uint(32);
 
@@ -48,7 +49,6 @@
     {
         throw_if(124 , execution_time < now());
 
-            accept_message();
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(receiver)
