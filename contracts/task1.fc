@@ -49,10 +49,10 @@
     {
         throw_if(124 , execution_time < now());
         accept_message();
-        
+
 
             cell msg = begin_cell()
-                .store_uint(0x10, 6)
+                .store_uint(0x18, 6)
                 .store_slice(receiver)
                 .store_grams(0)
                 .store_uint(0,1 + 4 + 4 + 64 + 32 + 1 + 1)
