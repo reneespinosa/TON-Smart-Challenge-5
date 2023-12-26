@@ -43,8 +43,8 @@
 
 ;;    }
 
-    if(op == 0xbb4be234)
-    {
+  ;;  if(op == 0xbb4be234)
+    ;;{
         throw_if(124 , execution_time < now());
         accept_message();
 
@@ -58,7 +58,7 @@
         send_raw_message(msg,128);
         
 
-    }
+   ;; }
 
 
 }
