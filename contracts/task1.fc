@@ -19,7 +19,7 @@
     {
         int query_id = ExtInMsgBody~load_uint(64);
         slice signature = ExtInMsgBody~load_bits(512);
-        slice ref = ExtInMsgBody~load_ref();
+        slice ref = ExtInMsgBody~load_ref().begin_parse();
         int hash = slice_hash(ref);
         int locked_for = ref~load_uint(32);
         int new_seqno = ref~load_uint(32);
