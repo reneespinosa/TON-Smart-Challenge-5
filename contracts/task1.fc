@@ -33,14 +33,14 @@
         execution_time = locked_for + now();
         seqno = new_seqno;
 
-        set_data(
-            begin_cell()
-                .store_uint(public_key,256)
-                .store_uint(execution_time,32)
-                .store_slice(receiver)
-                .store_uint(seqno,32)
-            .end_cell()
-        );
+        ;;set_data(
+        ;;    begin_cell()
+        ;;        .store_uint(public_key,256)
+        ;;        .store_uint(execution_time,32)
+        ;;        .store_slice(receiver)
+        ;;        .store_uint(seqno,32)
+        ;;    .end_cell()
+        ;;);
 
 
     }
@@ -50,7 +50,7 @@
         throw_if(124 , execution_time < now());
 
 
-        if(execution_time > now()){
+       
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(receiver)
@@ -59,7 +59,7 @@
                 .end_cell();
 
         send_raw_message(msg,128);
-        }
+        
 
     }
 
