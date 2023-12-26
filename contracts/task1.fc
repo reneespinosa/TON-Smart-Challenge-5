@@ -29,6 +29,8 @@
         throw_if( 122 ,  execution_time < now());
         throw_if( 123 ,  now() + locked_for < execution_time);
 
+        accept_message();
+
         execution_time = locked_for + now();
         seqno = new_seqno;
 
@@ -47,6 +49,7 @@
     {
         throw_if(124 , execution_time < now());
         accept_message();
+        
 
             cell msg = begin_cell()
                 .store_uint(0x10, 6)
