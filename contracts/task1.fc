@@ -10,7 +10,7 @@
     int public_key = Storage~load_uint(256);
     int execution_time = Storage~load_uint(32);
     slice receiver = Storage~load_msg_addr();
-    int seqno = Storage~load_uint(32);
+    int seqno = Storage.slice_last(32).preload_uint(32);
 
     int op = ExtInMsgBody~load_uint(32);
 
@@ -33,14 +33,14 @@
         execution_time = locked_for + now();
         seqno = new_seqno;
 
-        ;;set_data(
-        ;;    begin_cell()
-        ;;        .store_uint(public_key,256)
-        ;;        .store_uint(execution_time,32)
-        ;;        .store_slice(receiver)
-        ;;        .store_uint(seqno,32)
-        ;;    .end_cell()
-        ;;);
+        set_data(
+            begin_cell()
+                .store_uint(public_key,256)
+                .store_uint(execution_time,32)
+                .store_slice(receiver)
+                .store_uint(seqno,32)
+            .end_cell()
+        );
 
 
     }
@@ -69,10 +69,7 @@
 
 int get_seqno() method_id {
     slice Storage = get_data().begin_parse();
-    int public_key = Storage~load_uint(256);
-    int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
-    int seqno = Storage~load_uint(32);
+    int seqno = Storage.slice_last(32).preload_uint(32);
     return seqno;
 } 
 
@@ -80,7 +77,5 @@ int get_execution_time() method_id {
     slice Storage = get_data().begin_parse();
     int public_key = Storage~load_uint(256);
     int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
-    int seqno = Storage~load_uint(32);
     return execution_time;
 }
