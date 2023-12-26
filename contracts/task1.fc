@@ -74,7 +74,7 @@ int get_seqno() method_id {
     int seqno = Storage~load_uint(32);
 
     return seqno;
-}
+} 
 
 int get_execution_time() method_id {
     slice Storage = get_data().begin_parse();
