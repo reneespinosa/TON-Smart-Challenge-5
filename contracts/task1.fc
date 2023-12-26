@@ -36,7 +36,7 @@
                 .store_uint(public_key,256)
                 .store_uint(locked_for + now(),32)
                 .store_slice(receiver)
-                .store_uint(locked_for,32)
+                .store_uint(new_seqno,32)
             .end_cell()
         );
 
