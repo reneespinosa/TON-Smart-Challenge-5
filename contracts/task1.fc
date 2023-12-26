@@ -7,8 +7,9 @@
 
     slice Storage = get_data().begin_parse();
     int public_key = Storage~load_uint(256);
-    Storage~load_uint(32);
+    int execution_time = Storage~load_uint(32);
     slice receiver = Storage~load_msg_addr();
+    int seqno = Storage~load_uint(32);
 
     int op = ExtInMsgBody~load_uint(32);
 
@@ -22,21 +23,23 @@
         int locked_for = ref~load_uint(32);
         int new_seqno = ref~load_uint(32);
 
-        throw_if( 119 , new_seqno != get_seqno() + 1);
+        throw_if( 119 , new_seqno != seqno + 1);
         throw_unless(120, check_signature(hash,signature,public_key));
         throw_if( 121 , locked_for <= 0);
-        throw_if( 122 ,  get_execution_time() < now());
-        throw_if( 123 ,  now() + locked_for < get_execution_time());
+        throw_if( 122 ,  execution_time < now());
+        throw_if( 123 ,  now() + locked_for < execution_time);
 
         accept_message();
 
+        execution_time = locked_for + now();
+        seqno = new_seqno;
 
         set_data(
             begin_cell()
                 .store_uint(public_key,256)
-                .store_uint(locked_for + now(),32)
+                .store_uint(execution_time,32)
                 .store_slice(receiver)
-                .store_uint(new_seqno,32)
+                .store_uint(seqno,32)
             .end_cell()
         );
 
@@ -44,15 +47,14 @@
 
     if(op == 0xbb4be234)
     {
-        throw_if(124 , get_execution_time() < now());
+        throw_if(124 , execution_time < now());
         accept_message();
 
-            int query_id = ExtInMsgBody~load_uint(64);
 
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(receiver)
-                .store_grams(0)
+                .store_coins(0)
                 .store_uint(0,1 + 4 + 4 + 64 + 32 + 1 + 1)
                 .end_cell();
 
