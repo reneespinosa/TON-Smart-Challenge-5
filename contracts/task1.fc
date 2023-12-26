@@ -12,7 +12,6 @@
     int seqno = Storage.slice_last(32).preload_uint(32);
 
     int op = ExtInMsgBody~load_uint(32);
-    accept_message();
 
 
     if(op == 0x9df10277)
@@ -47,6 +46,7 @@
 
     if(op == 0xbb4be234)
     {
+        accept_message();
         throw_if(124 , execution_time < now());
 
             cell msg = begin_cell()
