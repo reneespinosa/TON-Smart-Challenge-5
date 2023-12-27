@@ -39,12 +39,13 @@
         slice rr = ref.begin_parse();
         int locked_for = rr~load_uint(32);
         int new_seqno = rr~load_uint(32);
-        int tt = now() + locked_for;
+        int pp = now();
+        int tt = pp + locked_for;
 
         throw_if( 119 , new_seqno != seqno + 1);
         throw_unless(120, check_signature(hash,signature,public_key));
         throw_if( 121 , locked_for <= 0);
-        throw_if( 122 ,  execution_time < now());
+        throw_if( 122 ,  execution_time < pp);
         throw_if( 123 ,  tt < execution_time);
 
         accept_message();
