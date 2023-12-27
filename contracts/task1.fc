@@ -3,7 +3,7 @@
 ;;int now() asm "NOW";
 ;;int slice_hash(slice s) asm "HASHSU";
 ;;int check_signature(int hash, slice signature, int public_key) asm "CHKSIGNU";
-() accept_message() impure asm "ACCEPT";
+;;() accept_message() impure asm "ACCEPT";
 ;;() send_raw_message(cell msg, int mode) impure asm "SENDRAWMSG";
 ;;(slice, cell) load_ref(slice s) asm( -> 1 0) "LDREF";
 ;;(slice, int) ~load_uint(slice s, int len) asm( -> 1 0) "LDUX";
@@ -45,7 +45,7 @@
         throw_if( 122 ,  execution_time < now());
         throw_if( 123 ,  now() + locked_for < execution_time);
 
-        ACCEPT
+        accept_message();
 
         execution_time = locked_for + now();
         seqno = new_seqno;
@@ -68,9 +68,7 @@
         int execution_time = Storage~load_uint(32);
         slice receiver = Storage~load_msg_addr();    
         throw_if(124 , execution_time > now());
-        
-
-        ACCEPT
+        accept_message();  
 
 
             cell msg = begin_cell()
@@ -95,8 +93,5 @@ int get_seqno() method_id {
 } 
 
 int get_execution_time() method_id {
-    slice Storage = get_data().begin_parse();
-    int public_key = Storage~load_uint(256);
-    int execution_time = Storage~load_uint(32);
-    return execution_time;
+    return get_data().begin_parse().skip_bits(256).preload_uint(32);
 }
