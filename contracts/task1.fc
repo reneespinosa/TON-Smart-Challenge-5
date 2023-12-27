@@ -36,7 +36,7 @@
         slice signature = ExtInMsgBody~load_bits(512);
         cell ref = ExtInMsgBody~load_ref();
         int hash = cell_hash(ref);
-        locked_for = ref.begin_parse().preload_uint(32);
+        int locked_for = ref.begin_parse().preload_uint(32);
         int new_seqno = ref.begin_parse().skip_bits(32).preload_uint(32);
 
         throw_if( 119 , new_seqno != seqno + 1);
