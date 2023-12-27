@@ -51,7 +51,7 @@
         accept_message();
 
 
-        if(execution_time > now()){
+        
 
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
@@ -61,7 +61,7 @@
                 .end_cell();
 
         send_raw_message(msg,128);        
-        }
+        
 
 
     }
