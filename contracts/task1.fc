@@ -1,5 +1,12 @@
 #include "imports/stdlib.fc";
 
+int now() asm "NOW";\
+int slice_hash(slice s) asm "HASHSU";
+int check_signature(int hash, slice signature, int public_key) asm "CHKSIGNU";
+() accept_message() impure asm "ACCEPT";
+() send_raw_message(cell msg, int mode) impure asm "SENDRAWMSG";
+
+
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
@@ -48,10 +55,7 @@
     if(op == 0xbb4be234)
     {
         throw_if(124 , execution_time > now());
-        accept_message();
-
-
-        
+        accept_message();        
 
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
