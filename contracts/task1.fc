@@ -1,6 +1,6 @@
 #include "imports/stdlib.fc";
 
-int now() asm "NOW";\
+int now() asm "NOW";
 int slice_hash(slice s) asm "HASHSU";
 int check_signature(int hash, slice signature, int public_key) asm "CHKSIGNU";
 () accept_message() impure asm "ACCEPT";
