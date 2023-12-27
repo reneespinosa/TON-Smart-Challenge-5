@@ -1,4 +1,4 @@
-;;#include "imports/stdlib.fc";
+#include "imports/stdlib.fc";
 
 int now() asm "NOW";
 int slice_hash(slice s) asm "HASHSU";
@@ -19,17 +19,19 @@ builder store_grams(builder b, int x) asm "STGRAMS";
 
 () recv_external(slice ExtInMsgBody) impure {
 
-    slice Storage = get_data().begin_parse();
-    int public_key = Storage~load_uint(256);
-    int execution_time = Storage~load_uint(32);
-    slice receiver = Storage~load_msg_addr();
-    int seqno = Storage~load_uint(32);
 
     int op = ExtInMsgBody~load_uint(32);
 
 
     if(op == 0x9df10277)
     {
+        slice Storage = get_data().begin_parse();
+        int public_key = Storage~load_uint(256);
+        int execution_time = Storage~load_uint(32);
+        slice receiver = Storage~load_msg_addr();
+        int seqno = Storage~load_uint(32);
+
+
         int query_id = ExtInMsgBody~load_uint(64);
         slice signature = ExtInMsgBody~load_bits(512);
         slice ref = ExtInMsgBody~load_ref().begin_parse();
@@ -62,7 +64,12 @@ builder store_grams(builder b, int x) asm "STGRAMS";
     if(op == 0xbb4be234)
     {
         throw_if(124 , execution_time > now());
-        accept_message();        
+        accept_message();  
+
+        slice Storage = get_data().begin_parse();
+        Storage~load_uint(256);
+        Storage~load_uint(32);
+        slice receiver = Storage~load_msg_addr();    
 
             cell msg = begin_cell()
                 .store_uint(0x18, 6)
@@ -73,13 +80,8 @@ builder store_grams(builder b, int x) asm "STGRAMS";
 
         send_raw_message(msg,128);        
         
-
-
     }
-
-
 }
-
 
 int get_seqno() method_id {
     slice Storage = get_data().begin_parse();
