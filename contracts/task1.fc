@@ -36,9 +36,8 @@
         slice signature = ExtInMsgBody~load_bits(512);
         cell ref = ExtInMsgBody~load_ref();
         int hash = cell_hash(ref);
-        slice rr = ref.begin_parse();
-        int locked_for = rr~load_uint(32);
-        int new_seqno = rr~load_uint(32);
+        locked_for = ref.begin_parse().preload_uint(32);
+        int new_seqno = ref.begin_parse().skip_bits(32).preload_uint(32);
 
         throw_if( 119 , new_seqno != seqno + 1);
         throw_unless(120, check_signature(hash,signature,public_key));
@@ -47,7 +46,7 @@
         throw_if( 123 ,  now() + locked_for < execution_time);
 
         accept_message();
-        
+
         set_data(
             begin_cell()
                 .store_uint(public_key,256)
