@@ -22,7 +22,6 @@
 
     int op = ExtInMsgBody~load_uint(32);
 
-
     if(op == 0x9df10277)
     {
         slice Storage = get_data().begin_parse();
