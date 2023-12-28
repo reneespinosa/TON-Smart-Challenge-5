@@ -312,7 +312,7 @@ int min_val(int x,int y)
                 }
 
                 cx = bestcx;
-                cy = bestcy
+                cy = bestcy;
 
 
                 if(cx == stax){
