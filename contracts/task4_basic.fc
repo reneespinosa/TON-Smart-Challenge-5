@@ -25,6 +25,8 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
 ;; S 83
 ;; E 69
 
+global int maxi;
+
 
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
@@ -32,12 +34,7 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
 
-        
-
-        ;; shortest path sin obstacles
-            ;; find start
-            ;; find end
-                ;; expand
+        maxi = 100;
 
        
 
