@@ -16,6 +16,7 @@ forall X -> X first(tuple t) asm "FIRST";
 forall X -> X second(tuple t) asm "SECOND";
 forall X -> X third(tuple t) asm "THIRD";
 forall X -> X fourth(tuple t) asm "3 INDEX";
+;; at for accessing positions
 
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
@@ -27,6 +28,13 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
             ;; find start
             ;; find end
                 ;; expand
+
+        tuple cmaze = maze;
+
+        pair(x,y) sta = (1,2);
+        
+
+
 
    
         tuple a = null();
