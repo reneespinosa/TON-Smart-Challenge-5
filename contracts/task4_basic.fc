@@ -28,8 +28,6 @@ forall X -> (tuple, ()) ~set_index_var(tuple t, X value, int position) asm "SETI
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
-tupla 
-
 int out_of_index(int n,int m ,int x ,int y)
 {
     if(x < 0)
