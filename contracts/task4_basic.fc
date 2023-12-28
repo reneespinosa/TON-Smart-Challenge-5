@@ -31,7 +31,10 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
 
         tuple cmaze = maze;
 
-        pair(x,y) sta = (1,2);
+        int x = 1 ;
+        int y = 2 ; 
+
+        pair(x,y);
         
 
 
