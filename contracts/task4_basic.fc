@@ -140,7 +140,7 @@ int min_val(int x,int y)
         
         -}
 
-        cmaze~set_index_var(cmaze.at(endx).set_index_var(100, endy), endx);
+        cmaze~set_index_var(cmaze.at(endx)~set_index_var(100, endy), endx);
 
         if(cmaze.at(endx).at(endy) == 100)
         {
