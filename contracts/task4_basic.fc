@@ -66,9 +66,6 @@ int min_val(int x,int y)
 
 tuple setval(tuple cmaze,int i ,int j, int val)
 {
-    tuple h = cmaze.at(i);
-    h = h.set_index_var(val,j);
-    return cmaze.set_index_var(h,j);
 }
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
@@ -146,8 +143,10 @@ tuple setval(tuple cmaze,int i ,int j, int val)
          
         
 
-       
-        cmaze = setval(cmaze,endx,endy,100);
+      
+        tuple h = cmaze.at(i);
+        h = h.set_index_var(100,j);
+        cmaze = cmaze.set_index_var(h,j);
 
         if(cmaze.at(endx).at(endy) == 100)
         {
