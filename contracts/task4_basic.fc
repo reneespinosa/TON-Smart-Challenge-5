@@ -79,7 +79,7 @@ int min_val(int x,int y)
         int i = 0;
         int j = 0;
         
-        {
+        
 
         while( i < n)
         {
@@ -92,7 +92,7 @@ int min_val(int x,int y)
                 {
                     stax = i;
                     stay = j;
-                    cmaze.at(i)~set_index_var(0,j);
+                    cmaze.at(i).set_index_var(0,j);
                 }
 
 
@@ -139,10 +139,7 @@ int min_val(int x,int y)
         ;; setted E to 100
         ;; setted S to 0
         ;; setted X to 103
-        }
-
-
-
+        
 
 
 
@@ -216,6 +213,13 @@ int min_val(int x,int y)
 
         int len_path1 = cmaze.at(endx).at(endy);
 
+
+
+
+
+
+
+        {-
         if(len_path1 != 100)
         {
             ;; contruct the path
@@ -333,10 +337,18 @@ int min_val(int x,int y)
           
         }
 
-   
+
+
+    -}
+
+        if(len_path1 == 100){
+
+
+        ;; there is no path ...
         tuple a = null();
         return (-1,0,0,a);
-
+        }
     
+        return (-1,0,0,maze);
 }
 
