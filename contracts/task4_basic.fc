@@ -137,8 +137,9 @@ int min_val(int x,int y)
 
 
 
-        cmaze.at(stax).set_index_var(0,stay);
-        cmaze~at(endx).set_index_var(101,endy);
+        cmaze~set_index_var(cmaze.at(i).set_index_var(0, j), i);
+        cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
+
         int len_path1 = cmaze.at(endx).at(endy);
 
         if(len_path1 == 101)
