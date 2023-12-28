@@ -64,7 +64,7 @@ int min_val(int x,int y)
     return a;
 }
 
-tuple setval(tupla cmaze,int i ,int j, int val)
+tuple setval(tuple cmaze,int i ,int j, int val)
 {
     tuple h = cmaze.at(i);
     h = h.set_index_var(val,j);
