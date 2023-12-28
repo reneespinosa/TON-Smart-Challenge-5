@@ -92,7 +92,7 @@ int min_val(int x,int y)
                 {
                     stax = i;
                     stay = j;
-                    cmaze.at(i).set_index_var(0,j);
+                    cmaze.at(i)~set_index_var(0,j);
                 }
 
 
