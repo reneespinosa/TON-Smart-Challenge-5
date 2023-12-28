@@ -87,35 +87,38 @@ int min_val(int x,int y)
 
             while( j < m)
             {
-
+                ;; S 83
                 if( maze.at(i).at(j) == 83 )
                 {
                     stax = i;
                     stay = j;
+                    cmaze.at(i).set_index_var(0,j);
+                }
 
-                    }
 
+                ;; E 69
                 if( maze.at(i).at(j) == 69)
                 {
                     endx = i;
                     endy = j;
+                    cmaze.at(i).set_index_var(100,j);
                 }
 
+                ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
                     cmaze.at(i).set_index_var(100,j);
                 }
 
+
+                ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
                     cmaze.at(i).set_index_var(101,j);
                 }
 
-                if( maze.at(i).at(j) == 69)
-                {
-                    cmaze.at(i).set_index_var(100,j);
-                }
 
+                ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
                     cmaze.at(i).set_index_var(103,j);
@@ -128,7 +131,7 @@ int min_val(int x,int y)
             i = i + 1;
         }
 
-        cmaze.at(stax).set_index_var(stay,0);
+        
 
         ;; got start and end positions
         ;; setted . to max  
@@ -209,9 +212,8 @@ int min_val(int x,int y)
 
         if(len_path1 != 100)
         {
-        ;;tuple a = null();
-        ;;return (-1,0,0,a);
-
+            tuple a = null();
+            return (-1,0,0,a);
         }
 
    
