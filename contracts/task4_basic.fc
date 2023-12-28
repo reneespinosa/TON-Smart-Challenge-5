@@ -37,8 +37,10 @@ global int maxi;
 
         maxi = 100;
 
-        int stax;int stay;
-        int endx;int endy;
+        int stax = -1;
+        int stay = -1;
+        int endx = -1;
+        int endy = -1;
         tuple cmaze = maze;
 
         int i = 0;
