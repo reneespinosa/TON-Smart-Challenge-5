@@ -209,12 +209,12 @@ int min_val(int x,int y)
 
         if(len_path1 != 100)
         {
+        tuple a = null();
+        return (-1,0,0,a);
 
         }
 
    
-        tuple a = null();
-        return (-1,0,0,a);
     
 }
 
