@@ -16,7 +16,15 @@ forall X -> X first(tuple t) asm "FIRST";
 forall X -> X second(tuple t) asm "SECOND";
 forall X -> X third(tuple t) asm "THIRD";
 forall X -> X fourth(tuple t) asm "3 INDEX";
+
 ;; at for accessing positions
+;; . 46
+;; ? 63
+;; ! 33
+;; X 88
+;; S 83
+;; E 69
+
 
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
@@ -24,18 +32,42 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
 
+        int inf = 100;int stax;int stay;int endx;int endy; tuple cmaze = maze;
+
+
         ;; shortest path sin obstacles
             ;; find start
             ;; find end
                 ;; expand
 
-        tuple cmaze = maze;
+       
 
-        int x = 1 ;
-        int y = 2 ; 
 
-        pair(x,y);
         
+
+        int i = 0;
+        int j = 0;
+        
+        while( i < n)
+        {
+            j = 0;
+
+            while( j < m)
+            {
+
+                if( maze.at(i).at(j) == 83 )
+                {
+
+                    
+
+
+                }
+                
+                j = j + 1;
+            }
+
+            i = i + 1;
+        }
 
 
 
