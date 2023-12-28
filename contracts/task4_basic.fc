@@ -28,6 +28,8 @@ forall X -> (tuple, ()) ~set_index_var(tuple t, X value, int position) asm "SETI
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
+tupla 
+
 int out_of_index(int n,int m ,int x ,int y)
 {
     if(x < 0)
@@ -64,6 +66,12 @@ int min_val(int x,int y)
     return a;
 }
 
+tuple setval(tupla cmaze,int i ,int j, int val)
+{
+    tuple h = cmaze.at(i);
+    h = h.set_index_var(val,j);
+    return cmaze.set_index_var(h,j);
+}
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
@@ -140,10 +148,8 @@ int min_val(int x,int y)
          
         
 
-        tuple h = cmaze.at(endx);
-        h = h.set_index_var(100,endy);
-        cmaze = cmaze.set_index_var(h,endx);
-
+       
+        cmaze = setval(cmaze,endx,endy,100);
 
         if(cmaze.at(endx).at(endy) == 100)
         {
