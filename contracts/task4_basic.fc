@@ -14,6 +14,7 @@ forall X -> X first(tuple t) asm "FIRST";
 forall X -> X second(tuple t) asm "SECOND";
 forall X -> X third(tuple t) asm "THIRD";
 forall X -> X fourth(tuple t) asm "3 INDEX";
+forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
 forall X -> (tuple, ()) ~set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
 
 ;; at for accessing positions
@@ -101,21 +102,21 @@ int min_val(int x,int y)
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
-                   ;; cmaze.at(i).set_index_var(100,j);
+                    cmaze.at(i).set_index_var(100,j);
                 }
 
 
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                   ;; cmaze.at(i).set_index_var(1000,j);
+                    cmaze.at(i).set_index_var(1000,j);
                 }
 
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
-                    ;;cmaze.at(i).set_index_var(1000,j);
+                    cmaze.at(i).set_index_var(1000,j);
                 }
 
                 
