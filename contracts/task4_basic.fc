@@ -141,8 +141,14 @@ int min_val(int x,int y)
         ;; setted X to 103
         }
 
+
+
+
+
+
+
         ;; shortest path
-        repeat(500)
+        repeat(100)
         {
             i = 0;
             j = 0;
@@ -210,10 +216,121 @@ int min_val(int x,int y)
 
         int len_path1 = cmaze.at(endx).at(endy);
 
-        if(len_path1 == 100)
+        if(len_path1 != 100)
         {
-            tuple a = null();
-            return (-1,0,0,a);
+            ;; contruct the path
+
+            int cx = endx;
+            int cy = endy;
+            int val = len_path1;
+            int doo = -1;
+
+            while(doo)
+            {
+                
+                int bestcx = cx;
+                int bestcy = cy;
+
+                if(out_of_index(n,m,cx + 1,cy))
+                {
+                    if(cmaze.at(cx + 1).at(cy) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy);
+                        bestcx = cx + 1;
+                        bestcy = cy;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy))
+                {
+                    if(cmaze.at(cx - 1).at(cy) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy);
+                        bestcx = cx - 1;
+                        bestcy = cy;
+                    }
+                }
+
+                if(out_of_index(n,m,cx,cy + 1))
+                {
+                    if(cmaze.at(cx).at(cy + 1) < val)
+                    {
+                        val = cmaze.at(cx).at(cy + 1);
+                        bestcx = cx ;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx,cy - 1))
+                {
+                    if(cmaze.at(cx).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx).at(cy - 1);
+                        bestcx = cx ;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx + 1,cy + 1))
+                {
+                    if(cmaze.at(cx + 1).at(cy + 1) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy + 1);
+                        bestcx = cx + 1;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx + 1,cy - 1))
+                {
+                    if(cmaze.at(cx + 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy - 1);
+                        bestcx = cx + 1;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy + 1))
+                {
+                    if(cmaze.at(cx - 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy + 1);
+                        bestcx = cx - 1;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy - 1))
+                {
+                    if(cmaze.at(cx - 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy - 1);
+                        bestcx = cx - 1;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                cx = bestcx;
+                cy = bestcy
+
+
+                if(cx == stax){
+                    if(cy == stay)
+                        {
+                            doo = 0;
+                        }
+                }
+
+                if(doo == -1)
+                {
+                    maze.at(cx).set_index_var(33,cy);
+                }
+
+            }
+
+            return(-1,0,len_path1,maze);
+          
         }
 
    
