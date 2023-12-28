@@ -64,6 +64,7 @@ int min_val(int x,int y)
     return a;
 }
 
+
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
 
@@ -89,6 +90,7 @@ int min_val(int x,int y)
                 {
                     stax = i;
                     stay = j;
+                    cmaze~set_index_var(cmaze.at(stax).set_index_var(0, stay), stax);
                 }
 
 
@@ -97,26 +99,27 @@ int min_val(int x,int y)
                 {
                     endx = i;
                     endy = j;
+                    cmaze~set_index_var(cmaze.at(endx).set_index_var(100, endy), endx);
                 }
 
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
-                    cmaze.at(i).set_index_var(100,j);
+                    cmaze~set_index_var(cmaze.at(i).set_index_var(100, j), i);
                 }
 
 
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                    cmaze.at(i).set_index_var(1000,j);
+                    cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
                 }
 
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
-                    cmaze.at(i).set_index_var(1000,j);
+                    cmaze~set_index_var(cmaze.at(i).set_index_var(102, j), i);
                 }
 
                 
@@ -135,15 +138,9 @@ int min_val(int x,int y)
         ;; setted S to 0
         ;; setted X to 103
         
-
-
-
-        cmaze~set_index_var(cmaze.at(i).set_index_var(0, j), i);
-        ;;cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
-
         int len_path1 = cmaze.at(endx).at(endy);
 
-        if(len_path1 == 101)
+        if(len_path1 == 100)
         {
             tuple a = null();
             return (-1,0,0,a);
