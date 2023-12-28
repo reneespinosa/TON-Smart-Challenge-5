@@ -88,7 +88,6 @@ int min_val(int x,int y)
                 {
                     stax = i;
                     stay = j;
-                    cmaze.at(i).set_index_var(0,j);
                 }
 
 
@@ -97,7 +96,6 @@ int min_val(int x,int y)
                 {
                     endx = i;
                     endy = j;
-                    cmaze.at(i).set_index_var(100,j);
                 }
 
                 ;; . 46
@@ -139,9 +137,11 @@ int min_val(int x,int y)
 
 
 
-
+        cmaze.at(stax).set_index_var(0,stay);
+        cmaze.at(endx).set_index_var(100,endy);
         ;; shortest path
-        repeat(100)
+        int k = 0;
+        while(k <= 100)
         {
             i = 0;
             j = 0;
@@ -203,8 +203,10 @@ int min_val(int x,int y)
 
                 i = i + 1;
             }
-
+            k = k + 1;
         }
+
+        
 
         
         int len_path1 = cmaze.at(endx).at(endy);
