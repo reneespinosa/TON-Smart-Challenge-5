@@ -209,7 +209,7 @@ int min_val(int x,int y)
         
         int len_path1 = cmaze.at(endx).at(endy);
 
-        if(len_path1 == 0)
+        if(len_path1 == 100)
         {
             tuple a = null();
             return (-1,0,0,a);
