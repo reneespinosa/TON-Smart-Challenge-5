@@ -208,7 +208,7 @@ int min_val(int x,int y)
 
         
 
-        
+         
         int len_path1 = cmaze.at(endx).at(endy);
 
         if(len_path1 == 101)
