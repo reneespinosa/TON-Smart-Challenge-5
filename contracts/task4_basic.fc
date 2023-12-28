@@ -51,7 +51,7 @@ int out_of_index(int n,int m ,int x ,int y)
 
     return -1;
 }
-
+ 
 int min_val(int x,int y)
 {
     int a = x;
