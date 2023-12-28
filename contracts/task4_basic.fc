@@ -215,6 +215,9 @@ int min_val(int x,int y)
         }
 
    
+    tuple a = null();
+        return (-2,0,0,a);
+
     
 }
 
