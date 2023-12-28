@@ -1,12 +1,36 @@
 #include "imports/stdlib.fc";
 
+forall X -> (tuple) to_tuple (X x) asm "NOP";
+forall X -> (tuple, X) ~tpop (tuple t) asm "TPOP"; 
+forall X -> tuple tpush(tuple t, X value) asm "TPUSH";
+forall X -> (tuple, ()) ~tpush(tuple t, X value) asm "TPUSH";
+forall X -> tuple cons(X head, tuple tail) asm "CONS";
+forall X -> (X, tuple) uncons(tuple list) asm "UNCONS";
+tuple empty_tuple() asm "NIL";
+int tuple_length (tuple t) asm "TLEN";
+forall X, Y -> [X, Y] pair(X x, Y y) asm "PAIR";
+forall X, Y -> (X, Y) unpair([X, Y] t) asm "UNPAIR";
+forall X, Y, Z, W -> [X, Y, Z, W] tuple4(X x, Y y, Z z, W w) asm "4 TUPLE";
+forall X, Y, Z, W -> (X, Y, Z, W) untuple4([X, Y, Z, W] t) asm "4 UNTUPLE";
+forall X -> X first(tuple t) asm "FIRST";
+forall X -> X second(tuple t) asm "SECOND";
+forall X -> X third(tuple t) asm "THIRD";
+forall X -> X fourth(tuple t) asm "3 INDEX";
+
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
+
+        ;; shortest path sin obstacles
+            ;; find start
+            ;; find end
+                ;; expand
+
    
         tuple a = null();
         return (-1,0,0,a);
     
 }
+
