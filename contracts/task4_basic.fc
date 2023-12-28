@@ -140,7 +140,10 @@ int min_val(int x,int y)
         
         -}
 
-        cmaze~set_index_var(cmaze.at(endx)~set_index_var(100, endy), endx);
+        tuple h = cmaze.at(endx);
+        h = h.set_index_var(100,endy);
+        cmaze = h.set_index_var(h,endx);
+
 
         if(cmaze.at(endx).at(endy) == 100)
         {
