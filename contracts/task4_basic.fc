@@ -138,7 +138,7 @@ int min_val(int x,int y)
 
 
         cmaze.at(stax).set_index_var(0,stay);
-        cmaze.at(endx).set_index_var(100,endy);
+        cmaze.at(endx).set_index_var(101,endy);
         ;; shortest path
         int k = 0;
         while(k <= 100)
@@ -211,7 +211,7 @@ int min_val(int x,int y)
         
         int len_path1 = cmaze.at(endx).at(endy);
 
-        if(len_path1 == 100)
+        if(len_path1 == 101)
         {
             tuple a = null();
             return (-1,0,0,a);
