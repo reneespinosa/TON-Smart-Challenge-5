@@ -16,6 +16,7 @@ forall X -> X first(tuple t) asm "FIRST";
 forall X -> X second(tuple t) asm "SECOND";
 forall X -> X third(tuple t) asm "THIRD";
 forall X -> X fourth(tuple t) asm "3 INDEX";
+forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
 
 ;; at for accessing positions
 ;; . 46
@@ -36,10 +37,9 @@ global int maxi;
 
         maxi = 100;
 
-       
-
-
-        
+        int stax;int stay;
+        int endx;int endy;
+        tuple cmaze = maze;
 
         int i = 0;
         int j = 0;
@@ -53,11 +53,22 @@ global int maxi;
 
                 if( maze.at(i).at(j) == 83 )
                 {
-
-                    
-
+                    stax = i;
+                    stay = j;
 
                 }
+
+                if( maze.at(i).at(j) == 69)
+                {
+                    endx = i;
+                    endy = j;
+                }
+
+                if( maze.at(i).at(j) == 46)
+                {
+                    cmaze.at(i).set_index_var(maxi,j);
+                }
+
                 
                 j = j + 1;
             }
