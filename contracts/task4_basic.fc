@@ -26,16 +26,49 @@ forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR
 ;; S 83
 ;; E 69
 
-global int maxi;
-
-
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+}
+
+int out_of_index(int n,int m ,int x ,int y)
+{
+    if(x < 0)
+    {
+        return 0;
+    }
+    if(x > n)
+    {
+        return 0;
+    }
+
+    if(y < 0)
+    {
+        return 0;
+    }
+
+    if(y > m)
+    {
+        return 0;
+    }
+
+
+    return -1;
+
+}
+
+int min_val(int x,int y)
+{
+    int a = x;
+    
+    if(a > y)
+    {
+        a = y;
+    }
+
+    return a;
 }
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
-
-        maxi = 100;
 
         int stax = -1;
         int stay = -1;
@@ -46,6 +79,8 @@ global int maxi;
         int i = 0;
         int j = 0;
         
+        {
+
         while( i < n)
         {
             j = 0;
@@ -58,7 +93,7 @@ global int maxi;
                     stax = i;
                     stay = j;
 
-                }
+                    }
 
                 if( maze.at(i).at(j) == 69)
                 {
@@ -68,7 +103,22 @@ global int maxi;
 
                 if( maze.at(i).at(j) == 46)
                 {
-                    cmaze.at(i).set_index_var(maxi,j);
+                    cmaze.at(i).set_index_var(100,j);
+                }
+
+                if( maze.at(i).at(j) == 63)
+                {
+                    cmaze.at(i).set_index_var(101,j);
+                }
+
+                if( maze.at(i).at(j) == 69)
+                {
+                    cmaze.at(i).set_index_var(100,j);
+                }
+
+                if( maze.at(i).at(j) == 88)
+                {
+                    cmaze.at(i).set_index_var(103,j);
                 }
 
                 
@@ -78,6 +128,82 @@ global int maxi;
             i = i + 1;
         }
 
+        cmaze.at(stax).set_index_var(stay,0);
+
+        ;; got start and end positions
+        ;; setted . to max  
+        ;; setted ? to 101
+        ;; setted E to 100
+        ;; setted S to 0
+        ;; setted X to 103
+        }
+
+
+        repeat(100)
+        {
+            i = 0;
+            j = 0;
+
+             while( i < n)
+             {
+                j = 0;
+
+                while( j < m)
+                {
+
+                    if(cmaze.at(i).at(j) <= 100)
+                    {
+
+                        if(out_of_index(n,m,i + 1,j))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) ),j);
+                        }
+
+                        if(out_of_index(n,m,i - 1,j))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) ),j);
+                        }
+
+                        if(out_of_index(n,m,i,j + 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j + 1) ),j);
+                        }
+
+                        if(out_of_index(n,m,i,j - 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) ),j);
+                        }
+
+                        if(out_of_index(n,m,i + 1,j + 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) ),j);
+                        }
+
+                        if(out_of_index(n,m,i + 1,j - 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) ),j);
+                        }
+
+                        if(out_of_index(n,m,i - 1,j + 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) ),j);
+                        }
+
+                        if(out_of_index(n,m,i - 1,j - 1))
+                        {
+                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) ),j);
+                        }
+
+                    }
+                
+                     j = j + 1;
+                }
+
+                i = i + 1;
+            }
+
+
+        }
 
 
    
