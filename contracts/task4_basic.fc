@@ -66,9 +66,9 @@ int min_val(int x,int y)
 
 tuple setval(tuple cmaze,int i ,int j, int val)
 {
-        tuple h = cmaze.at(i);
-        h = h.set_index_var(100,j);
-        return cmaze.set_index_var(h,i);
+        tuple row = cmaze.at(i);
+        row = row.set_index_var(100,j);
+        return cmaze.set_index_var(row,i);
 }
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
@@ -96,7 +96,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 {
                     stax = i;
                     stay = j;
-                    cmaze~set_index_var(cmaze.at(stax).set_index_var(0, stay), stax);
+                    cmaze = setval(cmaze,stax,stay,0);
                 }
 
 
@@ -105,27 +105,27 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 {
                     endx = i;
                     endy = j;
-                   ;; cmaze~set_index_var(cmaze.at(endx).set_index_var(100, endy), endx);
+                    cmaze = setval(cmaze,stax,stay,100);
                 }
 
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
-                    cmaze~set_index_var(cmaze.at(i).set_index_var(100, j), i);
+                    cmaze = setval(cmaze,stax,stay,100);
                 }
 
 
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                    cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
+                   cmaze = setval(cmaze,stax,stay,101);
                 }
 
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
-                    cmaze~set_index_var(cmaze.at(i).set_index_var(102, j), i);
+                    cmaze = setval(cmaze,stax,stay,102);
                 }
 
                 
@@ -146,18 +146,12 @@ tuple setval(tuple cmaze,int i ,int j, int val)
          
         
 
-        cmaze = setval(cmaze,endx,endy,100);
-
-        if(cmaze.at(endx).at(endy) == 100)
-        {
-            tuple a = null();
-            return (-1,0,0,a);
-        }
+     
 
 
         ;; shortest path
-        int k = 0;
-        {-while(k <= 100)
+      
+        repeat(100)
         {
             i = 0;
             j = 0;
@@ -174,42 +168,42 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                         if(out_of_index(n,m,i + 1,j))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) + 1 ),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) + 1 ));
                         }
 
                         if(out_of_index(n,m,i - 1,j))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) + 1 ),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) + 1 ));
                         }
 
                         if(out_of_index(n,m,i,j + 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j + 1) + 1),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i ).at(j + 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i,j - 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) + 1),j);
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i + 1,j + 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) + 1),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i + 1,j - 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) + 1),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i - 1,j + 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) + 1),j);
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i - 1,j - 1))
                         {
-                            cmaze.at(i).set_index_var( min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) + 1),j);
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) + 1 ));
                         }
 
                     }
@@ -219,10 +213,15 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                 i = i + 1;
             }
-            k = k + 1;
+            
         }
-        -}
         
+        
+        if(cmaze.at(endx).at(endy) == 100)
+        {
+            tuple a = null();
+            return (-1,0,0,a);
+        }
 
          
 
