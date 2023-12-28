@@ -209,7 +209,9 @@ int min_val(int x,int y)
 
         }
 
-        int len_path1 = maze.at(endx).at(endy);
+        cmaze.at(endx).set_index_var(maze.at(endx).at(endy),endy);
+        
+        int len_path1 = cmaze.at(endx).at(endy);
 
 
 
