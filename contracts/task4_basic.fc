@@ -32,13 +32,7 @@ forall X -> X fourth(tuple t) asm "3 INDEX";
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
 
-        int infff = 100;
-        int stax;
-        int stay;
-        int endx;
-        int endy; 
-        tuple cmaze = maze;
-
+        
 
         ;; shortest path sin obstacles
             ;; find start
