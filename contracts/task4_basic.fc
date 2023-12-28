@@ -215,6 +215,7 @@ int min_val(int x,int y)
             return (-1,0,0,a);
         }
 
+        return (-2,0,0,null());
 
 
 
