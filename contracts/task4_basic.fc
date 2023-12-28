@@ -141,7 +141,7 @@ int min_val(int x,int y)
         cmaze.at(endx).set_index_var(101,endy);
         ;; shortest path
         int k = 0;
-        while(k <= 100)
+        {-while(k <= 100)
         {
             i = 0;
             j = 0;
@@ -205,7 +205,7 @@ int min_val(int x,int y)
             }
             k = k + 1;
         }
-
+        -}
         
 
          
