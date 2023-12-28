@@ -137,7 +137,7 @@ int min_val(int x,int y)
         ;; setted E to 100
         ;; setted S to 0
         ;; setted X to 103
-        
+         
         
 
         tuple h = cmaze.at(endx);
