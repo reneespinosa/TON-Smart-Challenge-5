@@ -138,7 +138,7 @@ int min_val(int x,int y)
 
 
         cmaze~set_index_var(cmaze.at(i).set_index_var(0, j), i);
-        cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
+        ;;cmaze~set_index_var(cmaze.at(i).set_index_var(101, j), i);
 
         int len_path1 = cmaze.at(endx).at(endy);
 
