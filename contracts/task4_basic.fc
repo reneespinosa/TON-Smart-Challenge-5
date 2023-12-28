@@ -48,9 +48,7 @@ int out_of_index(int n,int m ,int x ,int y)
         return 0;
     }
 
-
     return -1;
-
 }
 
 int min_val(int x,int y)
@@ -103,7 +101,7 @@ int min_val(int x,int y)
                 }
 
                 ;; . 46
-                if( maze.at(i).at(j) == 46)
+                if( maze.at(i).at(j) == 46)maze
                 {
                     cmaze.at(i).set_index_var(100,j);
                 }
@@ -112,14 +110,14 @@ int min_val(int x,int y)
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                    cmaze.at(i).set_index_var(101,j);
+                    cmaze.at(i).set_index_var(1000,j);
                 }
 
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
-                    cmaze.at(i).set_index_var(103,j);
+                    cmaze.at(i).set_index_var(1000,j);
                 }
 
                 
@@ -206,22 +204,23 @@ int min_val(int x,int y)
                 i = i + 1;
             }
 
-
         }
 
-        cmaze.at(endx).set_index_var(maze.at(endx).at(endy),endy);
         
         int len_path1 = cmaze.at(endx).at(endy);
 
-
-
+        if(len_path1 == 0)
+        {
+            return (-1,0,0,null());
+        }
 
 
 
 
         {-
-        if(len_path1 != 100)
+        if(len_path1  100)
         {
+            
             ;; contruct the path
 
             int cx = endx;
@@ -336,19 +335,8 @@ int min_val(int x,int y)
             return(-1,0,len_path1,maze);
           
         }
+        -}
 
-
-
-    -}
-
-        if(len_path1 == 69){
-
-
-        ;; there is no path ...
-        tuple a = null();
-        return (-1,0,0,a);
-        }
-    
-        return (-1,0,0,maze);
+        ;;return (-1,0,0,null());
 }
 
