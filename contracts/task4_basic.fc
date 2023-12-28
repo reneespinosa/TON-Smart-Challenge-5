@@ -211,7 +211,8 @@ int min_val(int x,int y)
 
         if(len_path1 == 0)
         {
-            return (-1,0,0,null());
+            tuple a = null();
+            return (-1,0,0,a);
         }
 
 
