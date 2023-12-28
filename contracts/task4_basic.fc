@@ -105,27 +105,27 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 {
                     endx = i;
                     endy = j;
-                    cmaze = setval(cmaze,stax,stay,100);
+                    cmaze = setval(cmaze,endx,endy,100);
                 }
 
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
-                    cmaze = setval(cmaze,stax,stay,100);
+                    cmaze = setval(cmaze,i,j,100);
                 }
 
 
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                   cmaze = setval(cmaze,stax,stay,101);
+                   cmaze = setval(cmaze,i,j,101);
                 }
 
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
-                    cmaze = setval(cmaze,stax,stay,102);
+                    cmaze = setval(cmaze,i,j,102);
                 }
 
                 
