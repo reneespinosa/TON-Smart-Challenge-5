@@ -101,7 +101,7 @@ int min_val(int x,int y)
                 }
 
                 ;; . 46
-                if( maze.at(i).at(j) == 46)maze
+                if( maze.at(i).at(j) == 46)
                 {
                     cmaze.at(i).set_index_var(100,j);
                 }
