@@ -67,7 +67,7 @@ int min_val(int x,int y)
 tuple setval(tuple cmaze,int i ,int j, int val)
 {
         tuple row = cmaze.at(i);
-        row = row.set_index_var(100,j);
+        row = row.set_index_var(val,j);
         return cmaze.set_index_var(row,i);
 }
 
@@ -150,7 +150,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 
         ;; shortest path
-      {-
+      
         repeat(100)
         {
             i = 0;
@@ -215,7 +215,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             }
             
         }
-        -}
+        
         
         
         
