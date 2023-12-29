@@ -85,9 +85,11 @@ slice slice_last(slice s, int len) asm "SDCUTLAST";
 }
 
 int get_seqno() method_id {
-    return get_data().begin_parse().slice_last(32)~load_uint(32);
+    slice cosa = get_data().begin_parse().slice_last(32);
+    return cosa~load_uint(32);
 } 
 
 int get_execution_time() method_id {
-    return get_data().begin_parse().skip_bits(256)~load_uint(32);
+    slice cosa = get_data().begin_parse().skip_bits(256);
+    return cosa~load_uint(32);
 }
