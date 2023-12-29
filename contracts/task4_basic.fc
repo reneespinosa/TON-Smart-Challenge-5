@@ -105,7 +105,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 {
                     endx = i;
                     endy = j;
-                    cmaze = setval(cmaze,endx,endy,100);
+                    cmaze = setval(cmaze,endx,endy,45);
                 }
 
                 ;; . 46
@@ -150,7 +150,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 
         ;; shortest path
-      
+      {-
         repeat(100)
         {
             i = 0;
@@ -215,11 +215,11 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             }
             
         }
+        -}
         
         
         
-        
-        if(cmaze.at(endx).at(endy) == 100)
+        if(cmaze.at(endx).at(endy) == 45)
         {
             tuple a = null();
             return (-1,0,0,a);
