@@ -1,21 +1,6 @@
 #include "imports/stdlib.fc";
 
-forall X -> (tuple) to_tuple (X x) asm "NOP";
-forall X -> (tuple, X) ~tpop (tuple t) asm "TPOP"; 
-forall X -> tuple tpush(tuple t, X value) asm "TPUSH";
-forall X -> (tuple, ()) ~tpush(tuple t, X value) asm "TPUSH";
-tuple empty_tuple() asm "NIL";
-int tuple_length (tuple t) asm "TLEN";
-forall X, Y -> [X, Y] pair(X x, Y y) asm "PAIR";
-forall X, Y -> (X, Y) unpair([X, Y] t) asm "UNPAIR";
-forall X, Y, Z, W -> [X, Y, Z, W] tuple4(X x, Y y, Z z, W w) asm "4 TUPLE";
-forall X, Y, Z, W -> (X, Y, Z, W) untuple4([X, Y, Z, W] t) asm "4 UNTUPLE";
-forall X -> X first(tuple t) asm "FIRST";
-forall X -> X second(tuple t) asm "SECOND";
-forall X -> X third(tuple t) asm "THIRD";
-forall X -> X fourth(tuple t) asm "3 INDEX";
 forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
-forall X -> (tuple, ()) ~set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
 
 ;; at for accessing positions
 ;; . 46
@@ -105,7 +90,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 {
                     endx = i;
                     endy = j;
-                    cmaze = setval(cmaze,endx,endy,45);
+                    cmaze = setval(cmaze,endx,endy,100);
                 }
 
                 ;; . 46
@@ -150,7 +135,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 
         ;; shortest path
-      {-
+      
         repeat(100)
         {
             i = 0;
@@ -215,11 +200,11 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             }
             
         }
-        -}
         
         
         
-        if(cmaze.at(endx).at(endy) == 45)
+        
+        if(cmaze.at(endx).at(endy) == 100)
         {
             tuple a = null();
             return (-1,0,0,a);
@@ -227,7 +212,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
          
 
-        return (-2,0,0,null());
+        return (-1,0,0,null());
 
 
 
