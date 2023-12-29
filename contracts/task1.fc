@@ -12,7 +12,7 @@ slice begin_parse(cell c) asm "CTOS";
 (slice, cell) ~load_ref(slice s) asm( -> 1 0) "LDREF";
 slice slice_last(slice s, int len) asm "SDCUTLAST";
 (slice, int) ~load_uint(slice s, int len) asm( -> 1 0) "LDUX";
-int preload_uint(slice s, int len) asm "PLDUX";
+(slice, int) load_uint(slice s, int len) asm( -> 1 0) "LDUX";
 (slice, slice) ~load_bits(slice s, int len) asm(s len -> 1 0) "LDSLICEX";
 (slice, ()) ~skip_bits(slice s, int len) asm "SDSKIPFIRST";
 
@@ -86,9 +86,9 @@ int preload_uint(slice s, int len) asm "PLDUX";
 }
 
 int get_seqno() method_id {
-    return get_data().begin_parse().slice_last(32).preload_uint(32);
+    return get_data().begin_parse().slice_last(32).load_uint(32);
 } 
 
 int get_execution_time() method_id {
-    return get_data().begin_parse().skip_bits(256).preload_uint(32);
+    return get_data().begin_parse().skip_bits(256).load_uint(32);
 }
