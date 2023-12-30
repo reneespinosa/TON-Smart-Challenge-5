@@ -17,11 +17,6 @@ slice slice_last(slice s, int len) asm "SDCUTLAST";
     int op = ExtInMsgBody~load_uint(32);
     if(op == 0x9df10277)
     {
-        slice Storage = get_data().begin_parse();
-        int public_key = Storage~load_uint(256);
-        int execution_time = Storage~load_uint(32);
-        slice receiver = Storage~load_msg_addr();
-        int seqno = Storage~load_uint(32);
 
          ExtInMsgBody~load_uint(64);
         slice signature = ExtInMsgBody~load_bits(512);
@@ -32,6 +27,14 @@ slice slice_last(slice s, int len) asm "SDCUTLAST";
         int new_seqno = rr~load_uint(32);
         int pp = now();
         int tt = pp + locked_for;
+
+        ExtInMsgBody = get_data().begin_parse();
+        int public_key = ExtInMsgBody~load_uint(256);
+        int execution_time = ExtInMsgBody~load_uint(32);
+        slice receiver = ExtInMsgBody~load_msg_addr();
+        int seqno = ExtInMsgBody~load_uint(32);
+
+
 
         throw_if( 119 , new_seqno != seqno + 1);
         throw_unless(120, check_signature(hash,signature,public_key));
@@ -51,10 +54,10 @@ slice slice_last(slice s, int len) asm "SDCUTLAST";
 
     if(op == 0xbb4be234)
     {
-         slice Storage = get_data().begin_parse();
-         Storage~load_uint(256);
-        int execution_time = Storage~load_uint(32);
-        slice receiver = Storage~load_msg_addr();    
+          ExtInMsgBody = get_data().begin_parse();
+         ExtInMsgBody~load_uint(256);
+        int execution_time = ExtInMsgBody~load_uint(32);
+        slice receiver = ExtInMsgBody~load_msg_addr();    
         throw_if(124 , execution_time > now());
         accept_message();  
 
