@@ -141,14 +141,34 @@ tuple setval(tuple cmaze,int i ,int j, int val)
     ;; setted inicial values;
 
 
-    tuple movimientos = to_tuple([-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]);
+    tuple movimientos = maze;
+
+    movimientos = setval(movimientos, 0, 0, -1);
+    movimientos = setval(movimientos, 0, 1, 0);
+    movimientos = setval(movimientos, 1, 0, 1);
+    movimientos = setval(movimientos, 1, 1, 0);
+    movimientos = setval(movimientos, 2, 0, 0);
+    movimientos = setval(movimientos, 2, 1, -1);
+    movimientos = setval(movimientos, 3, 0, 0);
+    movimientos = setval(movimientos, 3, 1, 1);
+    movimientos = setval(movimientos, 4, 0, -1);
+    movimientos = setval(movimientos, 4, 1, -1);
+    movimientos = setval(movimientos, 5, 0, -1);
+    movimientos = setval(movimientos, 5, 1, 1);
+    movimientos = setval(movimientos, 6, 0, 1);
+    movimientos = setval(movimientos, 6, 1, -1);
+    movimientos = setval(movimientos, 7, 0, 1);
+    movimientos = setval(movimientos, 7, 1, 1);
+
+    ;; creados los posibles movimientos
 
     i = 0;
     j = 0;
 
     while(i < n * m){
 
-        while(j < n* m){
+        j = 0;
+        while(j < n * m){
 
             int fila = j / M;
             int columna = j % M;
