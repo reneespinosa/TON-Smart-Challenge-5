@@ -201,7 +201,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             
         }
         
-        len_path1 = cmaze.at(endx).at(endy) ;
+        int len_path1 = cmaze.at(endx).at(endy) ;
 
         if(len_path1 != 100)
         {
@@ -321,5 +321,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
           
         }
 
-        return (-1,0,0,null());
+        tupla a = null();
+
+        return (-1,0,0,a);
 }
