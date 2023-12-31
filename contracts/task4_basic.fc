@@ -334,6 +334,6 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 
 
-        tupla a = null();
+        tuple a = null();
         return (-1,0,0,a);
 }
