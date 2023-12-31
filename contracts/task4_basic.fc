@@ -1,6 +1,7 @@
 #include "imports/stdlib.fc";
 
 forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
+forall X -> (tuple) to_tuple (X x) asm "NOP";
 
 ;; at for accessing positions
 ;; . 46
