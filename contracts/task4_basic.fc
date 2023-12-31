@@ -173,8 +173,9 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
             while(i < n){
 
+                j = 0;
                 while(j < m){
-
+                    
                     if(cmaze.at(i).at(j) <= 100){
                         
                         
