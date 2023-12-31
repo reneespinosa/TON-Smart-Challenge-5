@@ -170,8 +170,8 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         j = 0;
         while(j < n * m){
 
-            int fila = j / M;
-            int columna = j % M;
+            int fila = j / m;
+            int columna = j % m;
            
             if(vis.at(fila).at(columna)){
 
@@ -210,7 +210,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
         tuple xdxd = null();
 
-    if(mat.at(endx).at(endy) != 100){
+    if(mat.at(endx).at(endy) == 100){
 
         return (-1,0,0,xdxd);
 
