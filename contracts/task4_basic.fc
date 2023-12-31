@@ -64,9 +64,18 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         int endx = -1;
         int endy = -1;
         tuple cmaze = maze;
-        tuple mov = maze;
-        tuple prob = maze;
-
+        tuple mov = to_tuple(
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])],
+                    [to_tuple([1, 2])]
+                            );
 
     mov = setval(mov, 0, 0, -1); ;;arriba
     mov = setval(mov, 0, 1, 0);
@@ -158,14 +167,12 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         ;; setted E to 100
         ;; setted S to 0
         ;; setted X to 103
-         
-
         
 
-     
-
-
         ;; shortest path
+
+        int ni = -1;
+        int nj = -1;
       
         repeat(100){
 
@@ -183,8 +190,8 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                         while(k < 8){
 
-                            int ni = i + mov.at(k).at(0);
-                            int nj = j + mov.at(k).at(1);
+                            ni = i + mov.at(k).at(0);
+                            nj = j + mov.at(k).at(1);
 
 
                             if(out_of_index(n,m,ni,nj)){
