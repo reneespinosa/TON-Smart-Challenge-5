@@ -1,8 +1,14 @@
 #include "imports/stdlib.fc";
 
 forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
-forall X -> (tuple) to_tuple (X x) asm "NOP";
 
+;; at for accessing positions
+;; . 46
+;; ? 63
+;; ! 33
+;; X 88
+;; S 83
+;; E 69
  
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
@@ -50,173 +56,285 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         return cmaze.set_index_var(row,i);
 }
 
-
-;;    ! (signo de exclamación): 33
-;;    X: 88
-;;    S: 83
-;;    E: 69
-;;    . (punto): 46
-;;    ?  63
-
-
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
 
-    tuple vis = maze;
-    tuple mat = maze;
+        int stax = -1;
+        int stay = -1;
+        int endx = -1;
+        int endy = -1;
+        tuple cmaze = maze;
 
-    int srcx = -1;
-    int srcy = -1;
+        int i = 0;
+        int j = 0;
+        
+        
 
-    int endx = -1;
-    int endy = -1;
+        while( i < n)
+        {
+            j = 0;
 
-
-    int i = 0;
-    int j = 0;
-
-    while(i < n){
-        j = 0;
-        while(j < m){
-            vis = setval(vis,i,j,0);
-            j = j + 1;
-        }
-        i = i + 1;
-    }
-
-    ;; inicializar vis;
-
-    i = 0;
-    j = 0;
-    while(i < n){
-
-        j = 0;
-        while(j < m){
-            
-            ;; .
-            if(maze.at(i).at(j) == 46){
-            
-                mat = setval(mat,i,j,100);
-            }
-
-
-            ;; X
-            if(maze.at(i).at(j) == 88){
-                vis = setval(vis,i,j,-1);
-                mat = setval(mat,i,j,100);
-            }
-
-            ;; ?
-            if(maze.at(i).at(j) == 63){
-                vis = setval(vis,i,j,-1);
-                mat = setval(mat,i,j,100);
-            }
-
-            ;; S
-            if(maze.at(i).at(j) == 83){
-                mat = setval(mat,i,j,0);
-                vis = setval(vis,i,j,-1);
-
-                srcx = i;
-                srcy = j;
-
-            }
-
-            ;; E
-            if(maze.at(i).at(j) == 69){
-                mat = setval(mat,i,j,100);
-
-                endx = i;
-                endy = j;
-
-
-            }
-
-
-            j = j + 1;
-        }
-        i = i + 1;
-    }
-    
-    ;; setted inicial values;
-
-
-    tuple movimientos = maze;
-
-    movimientos = setval(movimientos, 0, 0, -1);
-    movimientos = setval(movimientos, 0, 1, 0);
-    movimientos = setval(movimientos, 1, 0, 1);
-    movimientos = setval(movimientos, 1, 1, 0);
-    movimientos = setval(movimientos, 2, 0, 0);
-    movimientos = setval(movimientos, 2, 1, -1);
-    movimientos = setval(movimientos, 3, 0, 0);
-    movimientos = setval(movimientos, 3, 1, 1);
-    movimientos = setval(movimientos, 4, 0, -1);
-    movimientos = setval(movimientos, 4, 1, -1);
-    movimientos = setval(movimientos, 5, 0, -1);
-    movimientos = setval(movimientos, 5, 1, 1);
-    movimientos = setval(movimientos, 6, 0, 1);
-    movimientos = setval(movimientos, 6, 1, -1);
-    movimientos = setval(movimientos, 7, 0, 1);
-    movimientos = setval(movimientos, 7, 1, 1);
-
-    ;; creados los posibles movimientos
-
-    i = 0;
-    j = 0;
-
-    while(i < n * m){
-
-        j = 0;
-        while(j < n * m){
-
-            int fila = j / m;
-            int columna = j % m;
-           
-            if(vis.at(fila).at(columna)){
-
-            
-                int k = 0 ;
-
-                while(k < 8){
-
-                    int nuevaFila = fila + movimientos.at(k).at(0);
-                    int nuevaColumna = columna + movimientos.at(k).at(1);
-                    
-
-                        if (out_of_index(n,m,nuevaFila,nuevaColumna)) {
-                            if (vis.at(nuevaFila).at(nuevaColumna) == 0) {
-                                if (mat.at(nuevaFila).at(nuevaColumna) > mat.at(fila).at(columna) + 1) 
-                                {
-                                     mat = setval(mat,nuevaFila,nuevaColumna,mat.at(fila).at(columna) + 1);
-                                     vis = setval(vis,nuevaFila,nuevaColumna,-1);
-                                }
-                            }
-                        }
-
-
-                    k = k + 1;
+            while( j < m)
+            {
+                ;; S 83
+                if( maze.at(i).at(j) == 83 )
+                {
+                    stax = i;
+                    stay = j;
+                    cmaze = setval(cmaze,stax,stay,0);
                 }
 
 
+                ;; E 69
+                if( maze.at(i).at(j) == 69)
+                {
+                    endx = i;
+                    endy = j;
+                    cmaze = setval(cmaze,endx,endy,100);
+                }
+
+                ;; . 46
+                if( maze.at(i).at(j) == 46)
+                {
+                    cmaze = setval(cmaze,i,j,100);
+                }
+
+
+                ;; ?  63
+                if( maze.at(i).at(j) == 63)
+                {
+                   cmaze = setval(cmaze,i,j,101);
+                }
+
+
+                ;; X 88
+                if( maze.at(i).at(j) == 88)
+                {
+                    cmaze = setval(cmaze,i,j,102);
+                }
+
+                
+                j = j + 1;
+            }
+
+            i = i + 1;
+        }
+
+        
+
+        ;; got start and end positions
+        ;; setted . to max  
+        ;; setted ? to 101
+        ;; setted E to 100
+        ;; setted S to 0
+        ;; setted X to 103
+         
+        
+
+     
+
+
+        ;; shortest path
+      
+        repeat(100)
+        {
+            i = 0;
+            j = 0;
+
+             while( i < n)
+             {
+                j = 0;
+
+                while( j < m)
+                {
+
+                    if(cmaze.at(i).at(j) <= 100)
+                    {
+
+                        if(out_of_index(n,m,i + 1,j) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i - 1,j) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i,j + 1) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i ).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i,j - 1) == 1)
+                        {
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i + 1,j + 1) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i + 1,j - 1) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i - 1,j + 1) == 1)
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i - 1,j - 1) == 1)
+                        {
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) + 1 ));
+                        }
+
+                    }
+                
+                     j = j + 1;
+                }
+
+                i = i + 1;
+            }
+            
+        }
+        
+        
+        
+        
+        if(cmaze.at(endx).at(endy) == 100)
+        {
+            tuple a = null();
+            return (-1,0,0,a);
+        }
+
+         
+
+        return (-2,0,0,null());
+
+
+
+        {-
+        if(len_path1  100)
+        {
+            
+            ;; contruct the path
+
+            int cx = endx;
+            int cy = endy;
+            int val = len_path1;
+            int doo = -1;
+
+            while(doo)
+            {
+                
+                int bestcx = cx;
+                int bestcy = cy;
+
+                if(out_of_index(n,m,cx + 1,cy))
+                {
+                    if(cmaze.at(cx + 1).at(cy) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy);
+                        bestcx = cx + 1;
+                        bestcy = cy;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy))
+                {
+                    if(cmaze.at(cx - 1).at(cy) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy);
+                        bestcx = cx - 1;
+                        bestcy = cy;
+                    }
+                }
+
+                if(out_of_index(n,m,cx,cy + 1))
+                {
+                    if(cmaze.at(cx).at(cy + 1) < val)
+                    {
+                        val = cmaze.at(cx).at(cy + 1);
+                        bestcx = cx ;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx,cy - 1))
+                {
+                    if(cmaze.at(cx).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx).at(cy - 1);
+                        bestcx = cx ;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx + 1,cy + 1))
+                {
+                    if(cmaze.at(cx + 1).at(cy + 1) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy + 1);
+                        bestcx = cx + 1;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx + 1,cy - 1))
+                {
+                    if(cmaze.at(cx + 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx + 1).at(cy - 1);
+                        bestcx = cx + 1;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy + 1))
+                {
+                    if(cmaze.at(cx - 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy + 1);
+                        bestcx = cx - 1;
+                        bestcy = cy + 1;
+                    }
+                }
+
+                if(out_of_index(n,m,cx - 1,cy - 1))
+                {
+                    if(cmaze.at(cx - 1).at(cy - 1) < val)
+                    {
+                        val = cmaze.at(cx - 1).at(cy - 1);
+                        bestcx = cx - 1;
+                        bestcy = cy - 1;
+                    }
+                }
+
+                cx = bestcx;
+                cy = bestcy;
+
+
+                if(cx == stax){
+                    if(cy == stay)
+                        {
+                            doo = 0;
+                        }
+                }
+
+                if(doo == -1)
+                {
+                    maze.at(cx).set_index_var(33,cy);
+                }
 
             }
 
-            j = j + 1;
+            return(-1,0,len_path1,maze);
+          
         }
-        i = i + 1;
-    }
+        -}
 
-        tuple xdxd = null();
-
-    if(mat.at(endx).at(endy) == 100){
-
-        return (-1,0,0,xdxd);
-
-    }
-
-    return(-3,0,0,xdxd);
-    
-
+        ;;return (-1,0,0,null());
 }
-
