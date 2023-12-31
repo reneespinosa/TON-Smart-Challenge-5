@@ -1,7 +1,6 @@
 #include "imports/stdlib.fc";
 
 forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
-forall X -> (tuple) to_tuple (X x) asm "NOP";
 
 ;; at for accessing positions
 ;; . 46
@@ -65,50 +64,13 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         int endx = -1;
         int endy = -1;
         tuple cmaze = maze;
-        tuple mov = to_tuple(
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2],
-                    [1,2]
-                            );
-
-    mov = setval(mov, 0, 0, -1); ;;arriba
-    mov = setval(mov, 0, 1, 0);
-    
-    mov = setval(mov, 1, 0, 1); ;;abajo
-    mov = setval(mov, 1, 1, 0);
-    
-    mov = setval(mov, 2, 0, 0); ;;izquierda
-    mov = setval(mov, 2, 1, -1);
-    
-    mov = setval(mov, 3, 0, 0); ;; derecha
-    mov = setval(mov, 3, 1, 1);
-    
-    mov = setval(mov, 4, 0, -1); ;; superior izquierda
-    mov = setval(mov, 4, 1, -1);
-    
-    mov = setval(mov, 5, 0, -1); ;; superior derecha
-    mov = setval(mov, 5, 1, 1);
-    
-    mov = setval(mov, 6, 0, 1); ;;inferior izquierda
-    mov = setval(mov, 6, 1, -1);
-    
-    mov = setval(mov, 7, 0, 1); 
-    mov = setval(mov, 7, 1, 1); ;; inferior derecha
+        tuple mov = maze;
+        tuple prob = maze;
 
 
         int i = 0;
         int j = 0;
         
-
-
-        
-
         while( i < n)
         {
             j = 0;
@@ -142,7 +104,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                   cmaze = setval(cmaze,i,j,101);
+                   cmaze = setval(cmaze,i,j,63);
                 }
 
 
@@ -167,55 +129,81 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         ;; setted E to 100
         ;; setted S to 0
         ;; setted X to 103
+         
+
         
 
+     
+
+
         ;; shortest path
-
-        int ni = -1;
-        int nj = -1;
       
-        repeat(100){
-
+        repeat(n * m)
+        {
             i = 0;
+            j = 0;
 
-            while(i < n){
-
+             while( i < n)
+             {
                 j = 0;
-                while(j < m){
 
-                    if(cmaze.at(i).at(j) <= 100){
-                        
-                        
-                        int k = 0;
+                while( j < m)
+                {
 
-                        while(k < 8){
+                    if(cmaze.at(i).at(j) <= 100)
+                    {
 
-                            ni = i + mov.at(k).at(0);
-                            nj = j + mov.at(k).at(1);
-
-
-                            if(out_of_index(n,m,ni,nj)){
-                                
-                                cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j),cmaze.at(ni).at(nj) + 1));
-
-                            }
-
-
-                            k = k + 1;
+                        if(out_of_index(n,m,i + 1,j))
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) + 1 ));
                         }
 
+                        if(out_of_index(n,m,i - 1,j) )
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i,j + 1))
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i,j - 1))
+                        {
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i + 1,j + 1))
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i + 1,j - 1))
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i - 1,j + 1))
+                        {
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) + 1 ));
+                        }
+
+                        if(out_of_index(n,m,i - 1,j - 1))
+                        {
+                           cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) + 1 ));
+                        }
 
                     }
-                    
-                    j = j + 1;
+                
+                     j = j + 1;
                 }
 
                 i = i + 1;
             }
-
+            
         }
         
-        int len_path1 = cmaze.at(endx).at(endy);
+        int len_path1 = cmaze.at(endx).at(endy) ;
 
         if(len_path1 != 100)
         {
@@ -337,6 +325,13 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         ;; hasta aqui 100 de probabilidad
 
         ;; ahora es donde viene lo bueno;
+
+
+
+
+
+
+
 
         tuple a = null();
         return (-1,0,0,a);
