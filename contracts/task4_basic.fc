@@ -281,7 +281,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                 if(out_of_index(n,m,cx - 1,cy + 1))
                 {
-                    if(cmaze.at(cx - 1).at(cy - 1) < val)
+                    if(cmaze.at(cx - 1).at(cy + 1) < val)
                     {
                         val = cmaze.at(cx - 1).at(cy + 1);
                         bestcx = cx - 1;
