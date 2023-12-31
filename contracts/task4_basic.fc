@@ -65,16 +65,15 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         int endy = -1;
         tuple cmaze = maze;
         tuple mov = to_tuple(
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])],
-                    [to_tuple([1, 2])]
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2],
+                    [1,2]
                             );
 
     mov = setval(mov, 0, 0, -1); ;;arriba
