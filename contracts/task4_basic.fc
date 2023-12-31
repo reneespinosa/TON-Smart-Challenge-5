@@ -64,9 +64,6 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         int endx = -1;
         int endy = -1;
         tuple cmaze = maze;
-        tuple mov = maze;
-        tuple prob = maze;
-
 
         int i = 0;
         int j = 0;
