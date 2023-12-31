@@ -201,23 +201,9 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             
         }
         
-        
-        
-        
-        if(cmaze.at(endx).at(endy) == 100)
-        {
-            tuple a = null();
-            return (-1,0,0,a);
-        }
+        len_path1 = cmaze.at(endx).at(endy) ;
 
-         
-
-        return (-2,0,0,null());
-
-
-
-        {-
-        if(len_path1  100)
+        if(len_path1 != 100)
         {
             
             ;; contruct the path
@@ -334,7 +320,6 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             return(-1,0,len_path1,maze);
           
         }
-        -}
 
-        ;;return (-1,0,0,null());
+        return (-1,0,0,null());
 }
