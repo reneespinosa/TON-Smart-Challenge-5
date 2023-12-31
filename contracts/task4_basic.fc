@@ -182,8 +182,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                     int nuevaFila = fila + movimientos.at(k).at(0);
                     int nuevaColumna = columna + movimientos.at(k).at(1);
-                    int nuevoIndice = nuevaFila * M + nuevaColumna;
-
+                    
 
                         if (out_of_index(n,m,nuevaFila,nuevaColumna)) {
                             if (vis.at(nuevaFila).at(nuevaColumna) == 0) {
