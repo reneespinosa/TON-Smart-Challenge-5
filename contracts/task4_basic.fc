@@ -317,8 +317,8 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
             }
 
-            maze = setval(maze,endx,endy,69);
-            maze = setval(maze,stax,stay,83);
+            ;;maze = setval(maze,endx,endy,69);
+            ;;maze = setval(maze,stax,stay,83);
 
             return(-1,0,len_path1,maze);
         }
