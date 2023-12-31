@@ -167,7 +167,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
         ;; shortest path
       
-        repeat(n * m){
+        repeat(100){
 
             i = 0;
 
@@ -175,7 +175,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                 j = 0;
                 while(j < m){
-                    
+
                     if(cmaze.at(i).at(j) <= 100){
                         
                         
@@ -208,7 +208,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
         }
         
-        int len_path1 = cmaze.at(endx).at(endy) ;
+        int len_path1 = cmaze.at(endx).at(endy);
 
         if(len_path1 != 100)
         {
@@ -330,13 +330,6 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         ;; hasta aqui 100 de probabilidad
 
         ;; ahora es donde viene lo bueno;
-
-
-
-
-
-
-
 
         tuple a = null();
         return (-1,0,0,a);
