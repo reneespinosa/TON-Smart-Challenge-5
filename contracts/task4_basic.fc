@@ -101,7 +101,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 ;; ?  63
                 if( maze.at(i).at(j) == 63)
                 {
-                   cmaze = setval(cmaze,i,j,63);
+                   cmaze = setval(cmaze,i,j,101);
                 }
 
 
@@ -126,12 +126,6 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         ;; setted E to 100
         ;; setted S to 0
         ;; setted X to 103
-         
-
-        
-
-     
-
 
         ;; shortest path
       
