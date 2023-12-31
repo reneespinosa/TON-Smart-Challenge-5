@@ -310,9 +310,9 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                         }
                 }
 
-                if(doo == -1)
+                if(doo)
                 {
-                    maze.at(cx).set_index_var(33,cy);
+                    maze = setval(maze,cx,cy,33);
                 }
 
             }
