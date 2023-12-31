@@ -136,7 +136,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
         ;; shortest path
       
-        repeat(100)
+        repeat(1000)
         {
             i = 0;
             j = 0;
@@ -316,7 +316,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 }
 
             }
-            
+
             return(-1,0,len_path1,maze);
         }
 
