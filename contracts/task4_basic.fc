@@ -215,7 +215,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
     }
 
-    return(-2,0,0,xdxd);
+    return(-1,0,0,xdxd);
     
 
 }
