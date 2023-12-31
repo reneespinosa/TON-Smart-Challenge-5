@@ -163,7 +163,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
                         if(out_of_index(n,m,i,j + 1))
                         {
-                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i ).at(j + 1) + 1 ));
+                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j + 1) + 1 ));
                         }
 
                         if(out_of_index(n,m,i,j - 1))
@@ -316,10 +316,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 }
 
             }
-
-            ;;maze = setval(maze,endx,endy,69);
-            ;;maze = setval(maze,stax,stay,83);
-
+            
             return(-1,0,len_path1,maze);
         }
 
