@@ -13,7 +13,7 @@ int out_of_index(int n,int m ,int x ,int y)
     {
         return 0;
     }
-    if(x > n)
+    if(x >= n)
     {
         return 0;
     }
@@ -23,7 +23,7 @@ int out_of_index(int n,int m ,int x ,int y)
         return 0;
     }
 
-    if(y > m)
+    if(y >= m)
     {
         return 0;
     }
