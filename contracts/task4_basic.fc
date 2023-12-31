@@ -34,7 +34,7 @@ int out_of_index(int n,int m ,int x ,int y)
         return 0;
     }
 
-    return 1;
+    return -1;
 }
  
 int min_val(int x,int y)
@@ -151,42 +151,42 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                     if(cmaze.at(i).at(j) <= 100)
                     {
 
-                        if(out_of_index(n,m,i + 1,j) == 1)
+                        if(out_of_index(n,m,i + 1,j))
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i - 1,j) == 1)
+                        if(out_of_index(n,m,i - 1,j) )
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i,j + 1) == 1)
+                        if(out_of_index(n,m,i,j + 1))
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i ).at(j + 1) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i,j - 1) == 1)
+                        if(out_of_index(n,m,i,j - 1))
                         {
                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i).at(j - 1) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i + 1,j + 1) == 1)
+                        if(out_of_index(n,m,i + 1,j + 1))
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j + 1) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i + 1,j - 1) == 1)
+                        if(out_of_index(n,m,i + 1,j - 1))
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i + 1).at(j - 1) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i - 1,j + 1) == 1)
+                        if(out_of_index(n,m,i - 1,j + 1))
                         {
                             cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j + 1) + 1 ));
                         }
 
-                        if(out_of_index(n,m,i - 1,j - 1) == 1)
+                        if(out_of_index(n,m,i - 1,j - 1))
                         {
                            cmaze = setval(cmaze,i,j,min_val(cmaze.at(i).at(j) , cmaze.at(i - 1).at(j - 1) + 1 ));
                         }
@@ -317,11 +317,23 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
             }
 
+            maze.setval(maze,endx,endy,69);
+            maze.setval(maze,stax,stay,89);
+
             return(-1,0,len_path1,maze);
-          
         }
 
-        tupla a = null();
+        ;; hasta aqui 100 de probabilidad
 
+        ;; ahora es donde viene lo bueno;
+
+
+
+
+
+
+
+
+        tupla a = null();
         return (-1,0,0,a);
 }
