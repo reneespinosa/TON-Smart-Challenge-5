@@ -130,7 +130,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
         ;; shortest path
       
-        repeat(n * m)
+        repeat(1000)
         {
             i = 0;
             j = 0;
@@ -335,7 +335,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                     stax = i;
                     stay = j;
                     cmaze = setval(cmaze,stax,stay,0);
-                    prop = setval(prop,stax,stay,0);
+                    
                 }
 
 
@@ -345,14 +345,14 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                     endx = i;
                     endy = j;
                     cmaze = setval(cmaze,endx,endy,100);
-                    prop = setval(prop,endx,endy,100);
+                    ;;prop = setval(prop,endx,endy,100);
                 }
 
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
                     cmaze = setval(cmaze,i,j,100);
-                    prop = setval(prop,i,j,100);
+                   ;; prop = setval(prop,i,j,100);
                 }
 
 
@@ -360,14 +360,14 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 if( maze.at(i).at(j) == 63)
                 {
                    cmaze = setval(cmaze,i,j,100);
-                   prop = setval(prop,i,j,100);
+                   ;;prop = setval(prop,i,j,100);
                 }
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
                     cmaze = setval(cmaze,i,j,102);
-                    prop = setval(cmaze,i,j,102);
+                    ;;prop = setval(cmaze,i,j,102);
                 }
 
                 
