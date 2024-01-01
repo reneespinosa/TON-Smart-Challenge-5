@@ -315,7 +315,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         }
         ;; 100% OK
 
-
+    {-
 
         cmaze = maze;
         tuple prob = maze;
