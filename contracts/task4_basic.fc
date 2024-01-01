@@ -377,7 +377,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             i = i + 1;
         }
 
-        
+        {-
         repeat(n * m)
         {
             i = 0;
@@ -561,7 +561,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         
          }
         }
-
+    -}
 
 
 
