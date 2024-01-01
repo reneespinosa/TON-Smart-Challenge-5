@@ -335,7 +335,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                     stax = i;
                     stay = j;
                     cmaze = setval(cmaze,stax,stay,0);
-                    
+                    prop = setval(prop,i,j,0);
                 }
 
 
@@ -345,14 +345,14 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                     endx = i;
                     endy = j;
                     cmaze = setval(cmaze,endx,endy,100);
-                    ;;prop = setval(prop,endx,endy,100);
+                    prop = setval(prop,i,j,100);
                 }
 
                 ;; . 46
                 if( maze.at(i).at(j) == 46)
                 {
                     cmaze = setval(cmaze,i,j,100);
-                   ;; prop = setval(prop,i,j,100);
+                    prop = setval(prop,i,j,100);
                 }
 
 
@@ -360,14 +360,14 @@ tuple setval(tuple cmaze,int i ,int j, int val)
                 if( maze.at(i).at(j) == 63)
                 {
                    cmaze = setval(cmaze,i,j,100);
-                   ;;prop = setval(prop,i,j,100);
+                   prop = setval(prop,i,j,100);
                 }
 
                 ;; X 88
                 if( maze.at(i).at(j) == 88)
                 {
                     cmaze = setval(cmaze,i,j,102);
-                    ;;prop = setval(cmaze,i,j,102);
+                    prop = setval(cmaze,i,j,102);
                 }
 
                 
@@ -378,9 +378,189 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         }
 
         
+        repeat(n * m)
+        {
+            i = 0;
+            j = 0;
 
+             while( i < n)
+             {
+                j = 0;
+
+                while( j < m)
+                {
+
+                    if(maze.at(i).at(j) != 88)
+                    {
+
+                        ;; DERECHA
+                        if (out_of_index(n, m, i, j + 1)) 
+                            {
+                                if (prop.at(i).at(j + 1) < prop.at(i).at(j)) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j + 1));
+                                        cmaze = setval(cmaze, i, j, cmaze.at(i).at(j + 1) + 1);
+                                            if (maze.at(i).at(j) == 63) {
+                                                prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                            }
+                                        } 
+
+                                        else{
+                                            
+                                            if (prop.at(i).at(j + 1) == prop.at(i).at(j)) {
+                                            cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i).at(j + 1)));
+                                            
+                                            if (maze.at(i).at(j) == 63) {
+                                                prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                            }
+
+                                            }
+                                        }
+                            }
+
+                            ;;IZQUIERDA     
+                            if (out_of_index(n, m, i, j - 1)) {
+                                if (prop.at(i).at(j - 1) < prop.at(i).at(j)) {
+                                     prop = setval(prop, i, j, prop.at(i).at(j - 1));
+                                        cmaze = setval(cmaze, i, j, cmaze.at(i).at(j - 1) + 1);
+                                   
+                                    if (maze.at(i).at(j) == 63) 
+                                    {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+
+                                    } 
+
+                                    else{
+                                         if (prop.at(i).at(j - 1) == prop.at(i).at(j)) {
+                                                cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i).at(j - 1)));
+                                                if (maze.at(i).at(j) == 63) {
+                                                    prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                                }
+                                            }
+                                        }
+                            }
+
+                            ;;ARRIBA
+                            if (out_of_index(n, m, i - 1, j)) {
+                                if (prop.at(i - 1).at(j) < prop.at(i).at(j)) {
+                                    prop = setval(prop, i, j, prop.at(i - 1).at(j));
+                                    cmaze = setval(cmaze, i, j, cmaze.at(i - 1).at(j) + 1);
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                } else {
+                                        if (prop.at(i - 1).at(j) == prop.at(i).at(j)) {
+                                        cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i - 1).at(j)));
+                                        if (maze.at(i).at(j) == 63) {
+                                            prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                        }
+                                    }
+                                }
+                            }
+
+                        ;;ABAJO
+                        if (out_of_index(n, m, i + 1, j)) {
+                            if (prop.at(i + 1).at(j) < prop.at(i).at(j)) {
+                                prop = setval(prop, i, j, prop.at(i + 1).at(j));
+                                cmaze = setval(cmaze, i, j, cmaze.at(i + 1).at(j) + 1);
+                                if (maze.at(i).at(j) == 63) {
+                                    prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                }
+                            } else
+                            { 
+                                if (prop.at(i + 1).at(j) == prop.at(i).at(j)) 
+                                {
+                                    
+                                        cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i + 1).at(j)));
+                                        if (maze.at(i).at(j) == 63) {
+                                            prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                        }
+
+                                }
+                            }
+
+
+                            ;; Arriba-Derecha
+                            if (out_of_index(n, m, i - 1, j + 1)) {
+                                if (prop.at(i - 1).at(j + 1) < prop.at(i).at(j)) {
+                                    prop = setval(prop, i, j, prop.at(i - 1).at(j + 1));
+                                    cmaze = setval(cmaze, i, j, cmaze.at(i - 1).at(j + 1) + 1);
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                } else{
+
+                                 if (prop.at(i - 1).at(j + 1) == prop.at(i).at(j)) {
+                                    cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i - 1).at(j + 1)));
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                }
+                                }
+                            }
+
+                            ;; Arriba-Izquierda
+                            if (out_of_index(n, m, i - 1, j - 1)) {
+                                if (prop.at(i - 1).at(j - 1) < prop.at(i).at(j)) {
+                                    prop = setval(prop, i, j, prop.at(i - 1).at(j - 1));
+                                    cmaze = setval(cmaze, i, j, cmaze.at(i - 1).at(j - 1) + 1);
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                } else{
+                                     if (prop.at(i - 1).at(j - 1) == prop.at(i).at(j)) {
+                                    cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i - 1).at(j - 1)));
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                    }
+                                }
+                            }
+
+                            ;; Abajo-Derecha
+                            if (out_of_index(n, m, i + 1, j + 1)) {
+                                if (prop.at(i + 1).at(j + 1) < prop.at(i).at(j)) {
+                                    prop = setval(prop, i, j, prop.at(i + 1).at(j + 1));
+                                    cmaze = setval(cmaze, i, j, cmaze.at(i + 1).at(j + 1) + 1);
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                } else{ if (prop.at(i + 1).at(j + 1) == prop.at(i).at(j)) {
+                                    cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i + 1).at(j + 1)));
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                }
+                                }
+                            }
+
+                            ;; Abajo-Izquierda
+                            if (out_of_index(n, m, i + 1, j - 1)) {
+                                if (prop.at(i + 1).at(j - 1) < prop.at(i).at(j)) {
+                                    prop = setval(prop, i, j, prop.at(i + 1).at(j - 1));
+                                    cmaze = setval(cmaze, i, j, cmaze.at(i + 1).at(j - 1) + 1);
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                } else {if (prop.at(i + 1).at(j - 1) == prop.at(i).at(j)) {
+                                    cmaze = setval(cmaze, i, j, min_val(cmaze.at(i).at(j), cmaze.at(i + 1).at(j - 1)));
+                                    if (maze.at(i).at(j) == 63) {
+                                        prop = setval(prop, i, j, prop.at(i).at(j) + 1);
+                                    }
+                                }
+                                }
+                            }
+                
+                     j = j + 1;
+                }
+
+                i = i + 1;
+              }
+            
+              }
         
-
+         }
+        }
 
 
 
