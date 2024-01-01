@@ -59,7 +59,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 (int, int, int, tuple) solve(int n, int m, tuple maze) method_id
 {
-
+    {-
         int stax = -1;
         int stay = -1;
         int endx = -1;
@@ -315,12 +315,12 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         }
         ;; 100% OK
 
-    {-
+    
 
         cmaze = maze;
         tuple prob = maze;
 
-        {-
+        
         i = 0;
         j = 0;
         
@@ -378,7 +378,7 @@ tuple setval(tuple cmaze,int i ,int j, int val)
             i = i + 1;
         }
 
-        {-
+        
         repeat(n * m)
         {
             i = 0;
@@ -564,12 +564,9 @@ tuple setval(tuple cmaze,int i ,int j, int val)
         }
     -}
 
-
-
-
-
-
-
-        tuple a = null();
-        return (-1,0,0,a); ;;OK
+        tuple a = null();  
+        return (-1,0,0,a); 
+        ;;OK
 }
+
+
