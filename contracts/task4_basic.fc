@@ -2,6 +2,7 @@
 
 forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR";
 
+
 ;; at for accessing positions
 ;; . 46
 ;; ? 63
@@ -9,7 +10,7 @@ forall X -> tuple set_index_var(tuple t, X value, int position) asm "SETINDEXVAR
 ;; X 88
 ;; S 83
 ;; E 69
- 
+
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
 }
 
@@ -312,10 +313,74 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
             return(-1,0,len_path1,maze);
         }
+        ;; 100% OK
 
-        ;; hasta aqui 100 de probabilidad
 
-        ;; ahora es donde viene lo bueno;
+
+        cmaze = maze;
+        tuple prob = maze;
+
+        i = 0;
+        j = 0;
+        
+        while( i < n)
+        {
+            j = 0;
+
+            while( j < m)
+            {
+                ;; S 83
+                if( maze.at(i).at(j) == 83 )
+                {
+                    stax = i;
+                    stay = j;
+                    cmaze = setval(cmaze,stax,stay,0);
+                    prop = setval(prop,stax,stay,0);
+                }
+
+
+                ;; E 69
+                if( maze.at(i).at(j) == 69)
+                {
+                    endx = i;
+                    endy = j;
+                    cmaze = setval(cmaze,endx,endy,100);
+                    prop = setval(prop,endx,endy,100);
+                }
+
+                ;; . 46
+                if( maze.at(i).at(j) == 46)
+                {
+                    cmaze = setval(cmaze,i,j,100);
+                    prop = setval(prop,i,j,100);
+                }
+
+
+                ;; ?  63
+                if( maze.at(i).at(j) == 63)
+                {
+                   cmaze = setval(cmaze,i,j,100);
+                   prop = setval(prop,i,j,100);
+                }
+
+                ;; X 88
+                if( maze.at(i).at(j) == 88)
+                {
+                    cmaze = setval(cmaze,i,j,102);
+                    prop = setval(cmaze,i,j,102);
+                }
+
+                
+                j = j + 1;
+            }
+
+            i = i + 1;
+        }
+
+        
+
+        
+
 
 
 
@@ -325,5 +390,5 @@ tuple setval(tuple cmaze,int i ,int j, int val)
 
 
         tuple a = null();
-        return (-1,0,0,a);
+        return (-1,0,0,a); ;;OK
 }
