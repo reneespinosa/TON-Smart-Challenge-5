@@ -14,8 +14,19 @@
     cell diccionario = store~load_dict();
 
   if (op == 0x368ddef3) {
-    (int chain, int dir2) = cin_msg~load_msg_addr().parse_std_addr();
-    throw_unless(120, dir == dir2);
+        slice dd = cin_msg~load_msg_addr();
+        int dir2 = dd.parse_std_addr();
+        throw_unless(120, dir == dir2);
+
+        in_msg_body~load_uint(64);
+        int dir3 = in_msg_body~load_std_addr();
+
+        dict~udict_set(256, dir3, in_msg_body);
+
+        set_data(begin_cell()
+            .store_slice(dir)
+            .store_dict(diccionario)
+            .end_cell());   
   }
 
   if (op == 0x278205c8) {
