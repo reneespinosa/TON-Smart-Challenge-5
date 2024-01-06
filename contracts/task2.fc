@@ -54,25 +54,16 @@
     
     
     
-
-
-
-        slice dd = cin_msg~load_msg_addr();
-        (int chain, int dir2) = dd.parse_std_addr();
+        (int chain, int dir2) = parse_std_addr(cin_msg~load_msg_addr());
         throw_unless(120, dir == dir2);
         in_msg_body~load_uint(64);
-        dd = in_msg_body~load_msg_addr();
-        (int chain, int dir3) = dd.parse_std_addr();
+        (int chain, int dir3) = parse_std_addr(in_msg_body~load_msg_addr());
         throw_unless(121, diccionario~udict_delete?(256, dir3));
         set_data(begin_cell()
             .store_uint(1 << 10, 11)
             .store_uint(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
-
-
-
-
     }
     
     
