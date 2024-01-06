@@ -43,12 +43,12 @@
 
     slice store = get_data().begin_parse();
     
-    (int chain, int dir) = store~load_msg_addr().parse_std_addr();
+    (int chain, int dir) = parse_std_addr(store~load_msg_addr());
   
     cell diccionario = store~load_dict();
 
 
-        slice cin_msg = in_msg_full.begin_parse();
+    slice cin_msg = in_msg_full.begin_parse();
   
     cin_msg~load_uint(4);
     
