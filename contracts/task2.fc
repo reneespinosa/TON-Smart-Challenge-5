@@ -24,7 +24,8 @@
         diccionario~udict_set(256, dir3, in_msg_body);
 
         set_data(begin_cell()
-            .store_slice(dir)
+      .store_int(1<<11, 11)
+            .store_int(dir)
             .store_dict(diccionario)
             .end_cell());   
   }
