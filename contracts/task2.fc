@@ -25,7 +25,7 @@
 
         set_data(begin_cell()
       .store_int(1<<11, 11)
-            .store_int(dir)
+            .store_int(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
   }
