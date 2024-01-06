@@ -19,13 +19,14 @@
         throw_unless(120, dir == dir2);
 
         in_msg_body~load_uint(64);
-        int dir3 = in_msg_body~load_std_addr();
+        dd = in_msg_body~load_msg_addr();
+        (int chain, int dir3) = dd.parse_std_addr();
 
         diccionario~udict_set(256, dir3, in_msg_body);
 
         set_data(begin_cell()
-      .store_int(1<<11, 11)
-            .store_int(dir, 256)
+      .store_uint(1 << 11, 11)
+            .store_uint(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
   }
