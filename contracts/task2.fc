@@ -21,7 +21,7 @@
         in_msg_body~load_uint(64);
         int dir3 = in_msg_body~load_std_addr();
 
-        dict~udict_set(256, dir3, in_msg_body);
+        diccionario~udict_set(256, dir3, in_msg_body);
 
         set_data(begin_cell()
             .store_slice(dir)
