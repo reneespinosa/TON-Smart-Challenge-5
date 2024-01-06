@@ -163,7 +163,7 @@
     }
 
 }
-
+  
 cell get_users() method_id {
   (slice store, slice dir) = get_data().begin_parse().load_msg_addr();
   return store~load_dict();
