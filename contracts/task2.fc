@@ -17,11 +17,11 @@
     
     
     if (op == 0x368ddef3) {
+
         (int chain, int dir2) = cin_msg.load_msg_addr().parse_std_addr();
         throw_unless(120, dir == dir2);
         in_msg_body~load_uint(64);
-        dd = in_msg_body~load_msg_addr();
-        (int chain, int dir3) = dd.parse_std_addr();
+        (int chain, int dir3) = in_msg_body.load_msg_addr().parse_std_addr();
         diccionario~udict_set(256, dir3, in_msg_body);
         set_data(begin_cell()
       .store_uint(1 << 10, 11)
@@ -92,7 +92,6 @@
 
 
     if (op == 0x68530b3) {
-      
     (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
     throw_unless(122, num);
           int ts = 0;
@@ -117,7 +116,7 @@
 
 
 
-
+    
 }
 
 cell get_users() method_id {
