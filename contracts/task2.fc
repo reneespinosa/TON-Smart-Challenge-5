@@ -30,7 +30,7 @@ cell get_users() method_id {
 }
 
 int get_user_share(slice cosa) method_id {
-  (int chain, int dir) = cosa~parse_std_addr();
+  (int chain, int dir) = cosa.parse_std_addr();
   (slice s, int num) = get_users().udict_get?(256, addr);
   if (num) {
     return s~load_uint(32);
