@@ -18,10 +18,10 @@
     
     if (op == 0x368ddef3) {
 
-        (int chain, int dir2) = cin_msg.load_msg_addr().parse_std_addr();
+        (int chain, int dir2) = parse_std_addr(cin_msg.load_msg_addr());
         throw_unless(120, dir == dir2);
         in_msg_body~load_uint(64);
-        (int chain, int dir3) = in_msg_body.load_msg_addr().parse_std_addr();
+        (int chain, int dir3) = parse_std_addr(in_msg_body.load_msg_addr());
         diccionario~udict_set(256, dir3, in_msg_body);
         set_data(begin_cell()
       .store_uint(1 << 10, 11)
