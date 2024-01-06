@@ -86,20 +86,23 @@
 
 
     (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
+
       throw_unless(122, num);
         int ts = 0;
+
         while(num){
             ts = ts + valor~load_uint(32);
             (llave, valor, num) = diccionario.udict_get_next?(256, llave);
-        } 
+        }
+
         (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
-    slice dd = cin_msg~load_msg_addr();
-        (int chain, int dir2) = dd.parse_std_addr();
-    in_msg_body~load_uint(64);
-    int aguacero = in_msg_body~load_coins();
-    while (num) {
-      int us = valor~load_uint(32);
-      cell payload = begin_cell()
+
+        (int chain, int dir2) = parse_std_addr(cin_msg~load_msg_addr());
+      in_msg_body~load_uint(64);
+     int aguacero = in_msg_body~load_coins();
+     while (num) {
+        int us = valor~load_uint(32);
+        cell payload = begin_cell()
           .store_uint(0x0f8a7ea5, 32)
           .store_uint(0, 64)
           .store_coins(us * aguacero / ts)
@@ -135,12 +138,6 @@
     (int chain, int dir) = store~load_msg_addr().parse_std_addr();
   
     cell diccionario = store~load_dict();
-    
-    slice cin_msg = in_msg_full.begin_parse();
-  
-    cin_msg~load_uint(4);
-    
-    
 
 
     (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
@@ -165,9 +162,6 @@
         }
     }
 
-
-
-    
 }
 
 cell get_users() method_id {
@@ -176,8 +170,7 @@ cell get_users() method_id {
 }
 
 int get_user_share(slice cosa) method_id {
-  slice dd = cosa~load_msg_addr();
-  (int chain, int dir) = dd.parse_std_addr();
+  (int chain, int dir) = parse_std_addr(cosa~load_msg_addr());
   (slice s, int num) = get_users().udict_get?(256, dir);
   if (num) {
     return s~load_uint(32);
