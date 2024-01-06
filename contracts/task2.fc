@@ -102,7 +102,15 @@
      int aguacero = in_msg_body~load_coins();
      while (num) {
         int us = valor~load_uint(32);
-        cell payload = begin_cell()
+        cell msg = 
+    (llave, valor, num) = diccionario.udict_get_next?(256, llave);
+    send_raw_message(begin_cell()
+        .store_uint(0x18, 6)
+        .store_uint(1 << 10, 11)
+        .store_uint(dir2, 256)
+        .store_coins(20 * 1000 * 1000)
+        .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+        .store_ref(begin_cell()
           .store_uint(0x0f8a7ea5, 32)
           .store_uint(0, 64)
           .store_coins(us * aguacero / ts)
@@ -113,17 +121,8 @@
           .store_uint(0, 1)
           .store_coins(1)
           .store_uint(0, 1)
-        .end_cell();
-        cell msg = begin_cell()
-        .store_uint(0x18, 6)
-        .store_uint(1 << 10, 11)
-        .store_uint(dir2, 256)
-        .store_coins(20 * 1000 * 1000)
-        .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1)
-        .store_ref(payload)
-      .end_cell();
-    (llave, valor, num) = diccionario.udict_get_next?(256, llave);
-    send_raw_message(msg, 0);
+        .end_cell())
+      .end_cell(), 0);
       }
     
     
