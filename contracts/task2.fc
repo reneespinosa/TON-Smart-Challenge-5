@@ -1,5 +1,35 @@
 #include "imports/stdlib.fc";
 
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+  slice cin_msg = in_msg_full.begin_parse();
+  cin_msg~load_uint(4);
+  slice store = get_data().begin_parse();
+    (int chain, int dir) = store~load_msg_addr().parse_std_addr();
+  
+    cell diccionario = store~load_dict();
 
+  if (op == 0x368ddef3) {
+    (int chain, int dir) = cin_msg~load_msg_addr().parse_std_addr();
+    throw_unless(120, admin_address == addr);
+  }
+
+  if (op == 0x278205c8) {
+    (int chain, int dir) = cin_msg~load_msg_addr().parse_std_addr();
+    throw_unless(120, admin_address == addr);
+  }
+}
+
+cell get_users() method_id {
+  (slice store, slice dir) = get_data().begin_parse().load_msg_addr();
+  return store~load_dict();
+}
+
+int get_user_share(slice cosa) method_id {
+  (int chain, int dir) = cosa~parse_std_addr();
+  (slice s, int num) = get_users().udict_get?(256, addr);
+  if (num) {
+    return s~load_uint(32);
+  } else {
+    return 0;  
+  }
 }
