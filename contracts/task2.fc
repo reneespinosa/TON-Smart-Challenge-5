@@ -49,6 +49,11 @@
             .end_cell());   
   }
 
+  if (op == 0x7362d09c) {
+    (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
+        throw_unless(122, num);
+  }
+
   if (op == 0x68530b3) {
   (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
   throw_unless(122, num);
