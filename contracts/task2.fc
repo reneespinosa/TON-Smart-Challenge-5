@@ -6,27 +6,21 @@
     
     
     int op = in_msg_body~load_uint(32);
-    slice cin_msg = in_msg_full.begin_parse();
-  
-    cin_msg~load_uint(4);
-    slice store = get_data().begin_parse();
-    
-    (int chain, int dir) = store~load_msg_addr().parse_std_addr();
-  
-    cell diccionario = store~load_dict();
     
     
     if (op == 0x368ddef3) {
 
         slice store = get_data().begin_parse();
     
-        (int chain, int dir) = store~load_msg_addr().parse_std_addr();
+        (int chain, int dir) = parse_std_addr(store~load_msg_addr());
   
         cell diccionario = store~load_dict();
     
-
-
-
+        slice cin_msg = in_msg_full.begin_parse();
+  
+        cin_msg~load_uint(4);
+    
+    
 
         (int chain, int dir2) = parse_std_addr(cin_msg~load_msg_addr());
         throw_unless(120, dir == dir2);
@@ -38,17 +32,27 @@
             .store_uint(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
+    
+    
+    
     }
 
 
 
     if (op == 0x278205c8) {
 
-        slice store = get_data().begin_parse();
+    slice store = get_data().begin_parse();
     
     (int chain, int dir) = store~load_msg_addr().parse_std_addr();
   
     cell diccionario = store~load_dict();
+
+
+        slice cin_msg = in_msg_full.begin_parse();
+  
+    cin_msg~load_uint(4);
+    
+    
     
 
 
@@ -65,6 +69,10 @@
             .store_uint(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
+
+
+
+
     }
     
     
@@ -76,6 +84,12 @@
     (int chain, int dir) = store~load_msg_addr().parse_std_addr();
   
     cell diccionario = store~load_dict();
+    
+
+        slice cin_msg = in_msg_full.begin_parse();
+  
+    cin_msg~load_uint(4);
+    
     
 
 
@@ -125,13 +139,17 @@
     if (op == 0x68530b3) {
 
 
-      slice store = get_data().begin_parse();
+    slice store = get_data().begin_parse();
     
     (int chain, int dir) = store~load_msg_addr().parse_std_addr();
   
     cell diccionario = store~load_dict();
     
-
+    slice cin_msg = in_msg_full.begin_parse();
+  
+    cin_msg~load_uint(4);
+    
+    
 
 
     (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
