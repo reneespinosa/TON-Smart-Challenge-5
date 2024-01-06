@@ -149,12 +149,11 @@
           } 
           (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
           while(num){
-              int us = valor~load_uint(32);
               cell msg = begin_cell()
                           .store_uint(0x18, 6)
                           .store_uint(1 << 10, 11)
                           .store_uint(llave, 256)         
-                          .store_coins(us * msg_value / ts)
+                          .store_coins(valor~load_uint(32) * msg_value / ts)
                           .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)             
                       .end_cell();
               (llave, valor, num) = diccionario.udict_get_next?(256, llave);
