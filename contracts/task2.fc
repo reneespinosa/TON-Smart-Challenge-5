@@ -25,7 +25,7 @@
         diccionario~udict_set(256, dir3, in_msg_body);
 
         set_data(begin_cell()
-      .store_uint(1 << 11, 11)
+      .store_uint(1 << 10, 11)
             .store_uint(dir, 256)
             .store_dict(diccionario)
             .end_cell());   
@@ -79,7 +79,8 @@ cell get_users() method_id {
 }
 
 int get_user_share(slice cosa) method_id {
-  (int chain, int dir) = cosa.parse_std_addr();
+  slice dd = cosa~load_msg_addr();
+  (int chain, int dir) = dd.parse_std_addr();
   (slice s, int num) = get_users().udict_get?(256, dir);
   if (num) {
     return s~load_uint(32);
