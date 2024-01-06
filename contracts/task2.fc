@@ -3,8 +3,7 @@
 () recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
   if (in_msg_body.slice_empty?()) { return (); }
 
-    int op = in_msg_body~load_uint(32);
-
+  int op = in_msg_body~load_uint(32);
 
   slice cin_msg = in_msg_full.begin_parse();
   cin_msg~load_uint(4);
@@ -61,13 +60,12 @@
   slice dd = cin_msg~load_msg_addr();
         (int chain, int dir2) = dd.parse_std_addr();
   in_msg_body~load_uint(64);
-    int aguacero = in_msg_body~load_coins();
+    
   while (num) {
-    int us = valor~load_uint(32);
     cell payload = begin_cell()
           .store_uint(0x0f8a7ea5, 32)
           .store_uint(0, 64)
-          .store_coins(us * aguacero / ts)
+          .store_coins(valor~load_uint(32) * in_msg_body~load_coins() / ts)
           .store_uint(1 << 10, 11)
           .store_uint(llave, 256)
           .store_uint(1 << 10, 11)
@@ -99,15 +97,14 @@
         (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
         while(num){
             int us = valor~load_uint(32);
-            cell msg = begin_cell()
+            (llave, valor, num) = diccionario.udict_get_next?(256, llave);
+      send_raw_message(begin_cell()
                         .store_uint(0x18, 6)
                         .store_uint(1 << 10, 11)
                         .store_uint(llave, 256)         
                         .store_coins(us * msg_value / ts)
                         .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)             
-                    .end_cell();
-            (llave, valor, num) = diccionario.udict_get_next?(256, llave);
-      send_raw_message(msg,1);
+                    .end_cell(),1);
         }
   }
 }
