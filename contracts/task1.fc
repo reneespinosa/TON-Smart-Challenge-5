@@ -58,14 +58,12 @@ slice slice_last(slice s, int len) asm "SDCUTLAST";
 
         throw_if(124 , execution_time > now());
         accept_message();  
-
-        cell msg = begin_cell()
+        send_raw_message(begin_cell()
                 .store_uint(0x18, 6)
                 .store_slice(ExtInMsgBody~load_msg_addr())
                 .store_coins(0)
                 .store_uint(0,1 + 4 + 4 + 64 + 32 + 1 + 1)
-                .end_cell();
-        send_raw_message(msg,128);        
+                .end_cell(),128);        
         
     }
 }
