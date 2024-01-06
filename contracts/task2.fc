@@ -32,8 +32,44 @@
   }
 
   if (op == 0x278205c8) {
-    (int chain, int dir2) = cin_msg~load_msg_addr().parse_std_addr();
-    throw_unless(120, dir == dir2);
+        slice dd = cin_msg~load_msg_addr();
+        (int chain, int dir2) = dd.parse_std_addr();
+        throw_unless(120, dir == dir2);
+
+        in_msg_body~load_uint(64);
+        dd = in_msg_body~load_msg_addr();
+        (int chain, int dir3) = dd.parse_std_addr();
+
+  throw_unless(121, diccionario~udict_delete?(256, dir3));
+
+        set_data(begin_cell()
+      .store_uint(1 << 10, 11)
+            .store_uint(dir, 256)
+            .store_dict(diccionario)
+            .end_cell());   
+  }
+
+  if (op == 0x68530b3) {
+  (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
+  throw_unless(122, num);
+        int ts = 0;
+        while(num){
+            ts = ts + valor~load_uint(32);
+            (llave, valor, num) = diccionario.udict_get_next?(256, llave);
+        } 
+        (int llave, slice valor, int num) = diccionario.udict_get_min?(256);
+        while(num){
+            int us = valor~load_uint(32);
+            cell msg = begin_cell()
+                        .store_uint(0x18, 6)
+                        .store_uint(1 << 10, 11)
+                        .store_uint(llave, 256)         
+                        .store_coins(us * msg_value / ts)
+                        .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)             
+                    .end_cell();
+            (llave, valor, num) = diccionario.udict_get_next?(256, llave);
+      send_raw_message(msg,1);
+        }
   }
 }
 
